@@ -1,0 +1,13 @@
+version: 2
+jobs:
+    build:
+        docker:
+            - image: microsoft/aspnetcore-build:3.0
+        steps:
+            - checkout
+            - run:
+                name: Restore
+                command: dotnet restore
+            - run:
+                name: Build
+                command: dotnet build
