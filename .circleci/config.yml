@@ -1,13 +1,13 @@
 version: 2
 jobs:
     build:
+        branches:
+            only:
+              - master
         docker:
             - image: mcr.microsoft.com/dotnet/core/sdk:3.0-alpine
         steps:
             - checkout
             - run:
-                name: Restore
-                command: dotnet restore
-            - run:
-                name: Build
+                name: BuilderAndDeploy
                 command: dotnet build
