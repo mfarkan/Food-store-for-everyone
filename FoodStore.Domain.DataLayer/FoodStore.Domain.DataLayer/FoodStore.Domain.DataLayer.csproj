@@ -1,9 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
-
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
@@ -12,20 +11,20 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.0.1" />
   </ItemGroup>
 
-
   <ItemGroup>
-    <ProjectReference Include="..\FoodStore.Core\FoodStore.Core\FoodStore.Core.csproj" />
-    <ProjectReference Include="..\FoodStore.Domain.DataLayer\FoodStore.Domain.DataLayer\FoodStore.Domain.DataLayer.csproj" />
-    <ProjectReference Include="..\FoodStore.Domain\FoodStore.Domain\FoodStore.Domain.csproj" />
+    <ProjectReference Include="..\..\FoodStore.Core\FoodStore.Core\FoodStore.Core.csproj" />
+    <ProjectReference Include="..\..\FoodStore.Domain\FoodStore.Domain\FoodStore.Domain.csproj" />
   </ItemGroup>
 
-
   <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="Infrastructure\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

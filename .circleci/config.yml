@@ -9,5 +9,8 @@ jobs:
         steps:
             - checkout
             - run:
-                name: BuilderAndDeploy
-                command: dotnet build
+                name: Restore
+                command: dotnet restore
+            - run:
+                name: Build
+                command: dotnet build -c Release
