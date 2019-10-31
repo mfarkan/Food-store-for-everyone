@@ -1,6 +1,9 @@
 version: 2
 jobs:
     build:
+        branches:
+            only:
+              - master
         docker:
             - image: mcr.microsoft.com/dotnet/core/sdk:3.0-alpine
         steps:
