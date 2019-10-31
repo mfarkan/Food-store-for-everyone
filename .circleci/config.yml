@@ -10,4 +10,4 @@ jobs:
                 command: dotnet restore
             - run:
                 name: Build
-                command: dotnet build
+                command: dotnet build -c Release
