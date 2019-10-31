@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using FoodStore.Domain.DataLayer;
 using FoodStore.Domain.DataLayer.Infrastructure;
@@ -29,9 +30,10 @@ namespace FoodStore
         {
             //target assembly ; üzerinde çeþitli operasyonlar yaptýðýn project PMC'de ne seçilirse o aslýnda.
             //Migration assemblye ; Migrationlarýn codelarýnýn bulunduðu uygulama. böylece contextler baþka yerde tanýmlanýp baþka bir projede tutulabilir.
+            var migrationAssembly = typeof(UserManagementDbContext).GetTypeInfo().Assembly.GetName().Name;
             services.AddDbContext<UserManagementDbContext>(options =>
             {
-                options.UseNpgsql(Configuration.GetConnectionString("UserDefaultConnection"), sql => sql.MigrationsAssembly("FoodStore"));
+                options.UseNpgsql(Configuration.GetConnectionString("UserDefaultConnection"), sql => sql.MigrationsAssembly(migrationAssembly));
             });
             services.AddIdentity<ApplicationUser, ApplicationRole>().AddEntityFrameworkStores<UserManagementDbContext>();
             services.AddControllersWithViews();

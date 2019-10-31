@@ -18,4 +18,8 @@
     <ProjectReference Include="..\..\FoodStore.Domain\FoodStore.Domain\FoodStore.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
