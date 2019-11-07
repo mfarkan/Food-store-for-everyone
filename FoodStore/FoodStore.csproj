@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Remove="Resources\Views.Home.Index.resx" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
@@ -26,6 +30,11 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Infrastructure\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="Resources\Views\Home\Index.resx" />
   </ItemGroup>
 
 </Project>

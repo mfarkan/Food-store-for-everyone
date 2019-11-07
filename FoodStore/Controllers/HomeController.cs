@@ -6,18 +6,33 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using FoodStore.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Localization;
+using FoodStore.Domain.UserManagement;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Http;
 
 namespace FoodStore.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+        readonly UserManager<ApplicationUser> _userManager;
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
-
+        [HttpPost]
+        public IActionResult SetCulture(string culture, string returnUrl)
+        {
+            HttpContext.Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions() { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+                );
+            return Redirect(returnUrl);
+        }
         public IActionResult Index()
         {
             return View();
