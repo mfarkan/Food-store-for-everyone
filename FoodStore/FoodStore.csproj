@@ -46,11 +46,6 @@
 
 
   <ItemGroup>
-    <Compile Update="Resources\Models.ApplicationUserViewModel.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Models.ApplicationUserViewModel.resx</DependentUpon>
-    </Compile>
     <Compile Update="Resources\Resources.SharedResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -70,10 +65,6 @@
 
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Models.ApplicationUserViewModel.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Models.ApplicationUserViewModel.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Resources.SharedResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.SharedResource.Designer.cs</LastGenOutput>

@@ -5,7 +5,10 @@
 }
 <h1>Create</h1>
 
-<form asp-action="Create" asp-controller="User">
+<form asp-action="Create" asp-controller="User" class="form-group">
+    <div asp-validation-summary="All">
+
+    </div>
     <div class="row">
         <div class="col-md-3">
             @sharedLocalizer["Email"]
@@ -14,7 +17,7 @@
             @Html.EditorFor(model => model.Email)
         </div>
         <div class="col-md-3">
-            @Html.ValidationMessageFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="row">
@@ -25,7 +28,7 @@
             @Html.EditorFor(model => model.UserName)
         </div>
         <div class="col-md-3">
-            @Html.ValidationMessageFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="row">
@@ -36,7 +39,18 @@
             @Html.EditorFor(model => model.PassWord)
         </div>
         <div class="col-md-3">
-            @Html.ValidationMessageFor(model => model.PassWord)
+            @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            @sharedLocalizer["ComparePassword"]
+        </div>
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.ComparePassword)
+        </div>
+        <div class="col-md-3">
+            @Html.ValidationMessageFor(model => model.ComparePassword, "", new { @class = "text-danger" })
         </div>
     </div>
     <button type="submit">Kaydet</button>

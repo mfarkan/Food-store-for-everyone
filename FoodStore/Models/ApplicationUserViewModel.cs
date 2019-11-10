@@ -25,6 +25,12 @@ namespace FoodStore.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredError")]
         [Display(Name = "PassWord")]
         public string PassWord { get; set; }
+
+        [DataType(DataType.Password)]
+        [StringLength(maximumLength: 12, MinimumLength = 6, ErrorMessage = "StringLengthError")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredError")]
+        [Display(Name = "ComparePassword")]
+        [Compare("PassWord", ErrorMessage = "ComparePasswordError")]
         public string ComparePassword { get; set; }
     }
 }

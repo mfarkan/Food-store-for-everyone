@@ -54,7 +54,10 @@ namespace FoodStore
                 option.Password = new PasswordOptions
                 {
                     RequireDigit = true,
-                    RequiredLength = 12,
+                    RequiredLength = 6,
+                    RequireLowercase = false,
+                    RequireNonAlphanumeric = false,
+                    RequireUppercase = false,
                 };
                 option.User = new UserOptions
                 {

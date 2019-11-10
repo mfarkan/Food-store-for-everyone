@@ -29,11 +29,26 @@ namespace FoodStore.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(ApplicationUserViewModel user)
+        public async Task<IActionResult> Create(ApplicationUserViewModel user)
         {
             if (ModelState.IsValid)
             {
-
+                ApplicationUser applicationUser = new ApplicationUser()
+                {
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    CreatedAt = DateTime.Now,
+                    Gender = Core.Enumarations.Gender.Male
+                };
+                var result = await _userManager.CreateAsync(applicationUser, user.PassWord);
+                if (result.Errors.Any())
+                {
+                    result.Errors.ToList().ForEach(e => ModelState.AddModelError(e.Code, e.Description));
+                }
+                else
+                {
+                    return Redirect("~/");
+                }
             }
             return View();
         }

@@ -61,6 +61,24 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm Password.
+        /// </summary>
+        public static string ComparePassword {
+            get {
+                return ResourceManager.GetString("ComparePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passwords are not match..
+        /// </summary>
+        public static string ComparePasswordError {
+            get {
+                return ResourceManager.GetString("ComparePasswordError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Optimistic concurrency failure, object has been modified..
         /// </summary>
         public static string ConcurrencyFailure {
@@ -88,7 +106,7 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email &apos;{email}&apos; is already exists..
+        ///   Looks up a localized string similar to Email &apos;{0}&apos; is already exists..
         /// </summary>
         public static string DuplicateEmail {
             get {
@@ -97,7 +115,7 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User Name &apos;{userName}&apos; is already exists..
+        ///   Looks up a localized string similar to User Name &apos;{0}&apos; is already exists..
         /// </summary>
         public static string DuplicateUserName {
             get {
@@ -115,7 +133,7 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email &apos;{email}&apos; is invalid..
+        ///   Looks up a localized string similar to Email &apos;{0}&apos; is invalid..
         /// </summary>
         public static string InvalidEmail {
             get {
@@ -133,7 +151,7 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Role name &apos;{role}&apos; is invalid..
+        ///   Looks up a localized string similar to Role name &apos;{0}&apos; is invalid..
         /// </summary>
         public static string InvalidRoleName {
             get {
@@ -151,7 +169,7 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User name &apos;{userName}&apos; is invalid, can only contain letters or digits..
+        ///   Looks up a localized string similar to User name &apos;{0}&apos; is invalid, can only contain letters or digits..
         /// </summary>
         public static string InvalidUserName {
             get {
@@ -223,7 +241,7 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Passwords must be at least {length} characters..
+        ///   Looks up a localized string similar to Passwords must be at least &apos;{0}&apos; characters..
         /// </summary>
         public static string PasswordTooShort {
             get {
@@ -259,7 +277,7 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User already in role &apos;{role}&apos;..
+        ///   Looks up a localized string similar to User already in role &apos;{0}&apos;..
         /// </summary>
         public static string UserAlreadyInRole {
             get {
@@ -286,7 +304,7 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User is not in role &apos;{role}&apos;..
+        ///   Looks up a localized string similar to User is not in role &apos;{0}&apos;..
         /// </summary>
         public static string UserNotInRole {
             get {
