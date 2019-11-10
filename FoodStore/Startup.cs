@@ -4,14 +4,18 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using FoodStore.Core.Extensions;
+using FoodStore.Describer;
 using FoodStore.Domain.DataLayer;
 using FoodStore.Domain.DataLayer.Infrastructure;
 using FoodStore.Domain.UserManagement;
 using FoodStore.Resources;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,6 +48,7 @@ namespace FoodStore
             {
                 option.Lockout = new LockoutOptions
                 {
+                    MaxFailedAccessAttempts = Convert.ToInt32(Configuration.GetCustomerMaxFailedAccessAttempts()),
                     DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10),
                 };
                 option.Password = new PasswordOptions
@@ -55,13 +60,34 @@ namespace FoodStore
                 {
                     RequireUniqueEmail = true,
                 };
-            }).AddEntityFrameworkStores<UserManagementDbContext>();
+            }).AddErrorDescriber<CustomErrorDescriber>().AddDefaultTokenProviders()
+            .AddEntityFrameworkStores<UserManagementDbContext>();
+            services.ConfigureApplicationCookie(option =>
+            {
+                option.LoginPath = new PathString("/User/SignIn");
+                option.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                option.Cookie = new CookieBuilder
+                {
+                    HttpOnly = false,
+                    SameSite = SameSiteMode.Lax,
+                    SecurePolicy = CookieSecurePolicy.Always,
+                    Name = "IdentityCookie"
+                };
+                option.SlidingExpiration = true;
+            });
             services.AddLocalization(o =>
             {
                 o.ResourcesPath = "Resources";
             });
-            services.AddControllersWithViews()
-                .AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix);
+            services.AddAntiforgery(option => option.HeaderName = "X-XSRF-Token");
+            services.AddControllersWithViews(option =>
+            option.Filters.Add(new AutoValidateAntiforgeryTokenAttribute())).AddDataAnnotationsLocalization(o =>
+            {
+                o.DataAnnotationLocalizerProvider = (type, factory) =>
+                {
+                    return factory.Create(typeof(SharedResource));
+                };
+            }).AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,43 @@
+﻿@model ApplicationUserViewModel
+@{
+    ViewData["Title"] = viewLocalizer["CreatePage"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Create</h1>
+
+<form asp-action="Create" asp-controller="User">
+    <div class="row">
+        <div class="col-md-3">
+            @sharedLocalizer["Email"]
+        </div>
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.Email)
+        </div>
+        <div class="col-md-3">
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            @sharedLocalizer["UserName"]
+        </div>
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.UserName)
+        </div>
+        <div class="col-md-3">
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            @sharedLocalizer["PassWord"]
+        </div>
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.PassWord)
+        </div>
+        <div class="col-md-3">
+            @Html.ValidationMessageFor(model => model.PassWord)
+        </div>
+    </div>
+    <button type="submit">Kaydet</button>
+</form>

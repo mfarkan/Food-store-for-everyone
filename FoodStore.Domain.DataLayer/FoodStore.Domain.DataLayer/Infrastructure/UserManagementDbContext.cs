@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FoodStore.Domain.DataLayer.Infrastructure
 {
-    public class UserManagementDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
+    public class UserManagementDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid, ApplicationUserClaims, ApplicationUserRole, ApplicationUserLogin, ApplicationRoleClaims, ApplicationUserTokens>
     {
         public UserManagementDbContext(DbContextOptions<UserManagementDbContext> dbContext) : base(dbContext)
         {

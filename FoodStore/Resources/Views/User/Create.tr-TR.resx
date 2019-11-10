@@ -117,82 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ConcurrencyFailure" xml:space="preserve">
-    <value>Data eşleşme problemi , nesne değiştirilmiş.</value>
-  </data>
-  <data name="DefaultError" xml:space="preserve">
-    <value>Beklenmeyen bir hata oluştu.</value>
-  </data>
-  <data name="Deneme" xml:space="preserve">
-    <value>Türkçe</value>
-  </data>
-  <data name="DuplicateEmail" xml:space="preserve">
-    <value>Girilen email '{email}' sistemde mevcut.</value>
-  </data>
-  <data name="DuplicateUserName" xml:space="preserve">
-    <value>Girilen kullanıcı adı '{userName}' daha önceden alınmış.</value>
+  <data name="CreatePage" xml:space="preserve">
+    <value>Kullanıcı Oluşturma Sayfası</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Mail Adres</value>
-  </data>
-  <data name="InvalidEmail" xml:space="preserve">
-    <value>Girilen email '{email}' geçersiz.</value>
-  </data>
-  <data name="InvalidEmailError" xml:space="preserve">
-    <value>Lütfen geçerli bir mail adresi giriniz.</value>
-  </data>
-  <data name="InvalidRoleName" xml:space="preserve">
-    <value>Girilen rol '{role}' geçersiz.</value>
-  </data>
-  <data name="InvalidToken" xml:space="preserve">
-    <value>Geçersiz anahtar değeri.</value>
-  </data>
-  <data name="InvalidUserName" xml:space="preserve">
-    <value>Girilen kullanıcı adı '{userName}' sadece sayı ve harflerden oluşabilir.</value>
-  </data>
-  <data name="LoginAlreadyAssociated" xml:space="preserve">
-    <value>Bu kullanıcı daha önceden giriş yaptı.</value>
-  </data>
-  <data name="PassWord" xml:space="preserve">
-    <value>Şifre</value>
-  </data>
-  <data name="PasswordMismatch" xml:space="preserve">
-    <value>Geçersiz şifre.</value>
-  </data>
-  <data name="PasswordRequiresDigit" xml:space="preserve">
-    <value>Şifre en az bir adet rakam içermelidir ('0'-'9').</value>
-  </data>
-  <data name="PasswordRequiresLower" xml:space="preserve">
-    <value>Şifre en az bir adet küçük harf içermelidir ('a'-'z').</value>
-  </data>
-  <data name="PasswordRequiresNonAlphanumeric" xml:space="preserve">
-    <value>Şifre en azından bir adet alfa numeric olmayan değer içermelidir.</value>
-  </data>
-  <data name="PasswordRequiresUpper" xml:space="preserve">
-    <value>Şifre en az bir adet büyük harf içermelidir ('A'-'Z').</value>
-  </data>
-  <data name="PasswordTooShort" xml:space="preserve">
-    <value>Şifre en az {length} karakterde olmalıdır.</value>
-  </data>
-  <data name="RequiredError" xml:space="preserve">
-    <value>Zorunlu alan.</value>
-  </data>
-  <data name="StringLengthError" xml:space="preserve">
-    <value>{0} alanı {1} ila {2} karakter uzunluğunda olmalıdır.</value>
-  </data>
-  <data name="UserAlreadyHasPassword" xml:space="preserve">
-    <value>Kullanıcı için şifre daha önceden kaydedilmiş.</value>
-  </data>
-  <data name="UserAlreadyInRole" xml:space="preserve">
-    <value>Kullanıcı da '{role}' rolü mevcut.</value>
-  </data>
-  <data name="UserLockoutNotEnabled" xml:space="preserve">
-    <value>Bu kullanıcı için lock işlemi aktif değil.</value>
-  </data>
-  <data name="UserName" xml:space="preserve">
-    <value>Kullanıcı Adı</value>
-  </data>
-  <data name="UserNotInRole" xml:space="preserve">
-    <value>Kullanıcı da '{role}' rolü mevcut değil.</value>
   </data>
 </root>

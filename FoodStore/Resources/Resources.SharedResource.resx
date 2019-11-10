@@ -117,7 +117,82 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ConcurrencyFailure" xml:space="preserve">
+    <value>Optimistic concurrency failure, object has been modified.</value>
+  </data>
+  <data name="DefaultError" xml:space="preserve">
+    <value>An unknown failure has occurred.</value>
+  </data>
   <data name="Deneme" xml:space="preserve">
     <value>English</value>
+  </data>
+  <data name="DuplicateEmail" xml:space="preserve">
+    <value>Email '{email}' is already exists.</value>
+  </data>
+  <data name="DuplicateUserName" xml:space="preserve">
+    <value>User Name '{userName}' is already exists.</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email Address</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Email '{email}' is invalid.</value>
+  </data>
+  <data name="InvalidEmailError" xml:space="preserve">
+    <value>Please enter valid an email address.</value>
+  </data>
+  <data name="InvalidRoleName" xml:space="preserve">
+    <value>Role name '{role}' is invalid.</value>
+  </data>
+  <data name="InvalidToken" xml:space="preserve">
+    <value>Invalid token.</value>
+  </data>
+  <data name="InvalidUserName" xml:space="preserve">
+    <value>User name '{userName}' is invalid, can only contain letters or digits.</value>
+  </data>
+  <data name="LoginAlreadyAssociated" xml:space="preserve">
+    <value>A user with this login already exists.</value>
+  </data>
+  <data name="PassWord" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordMismatch" xml:space="preserve">
+    <value>Incorrect password.</value>
+  </data>
+  <data name="PasswordRequiresDigit" xml:space="preserve">
+    <value>Passwords must have at least one digit ('0'-'9').</value>
+  </data>
+  <data name="PasswordRequiresLower" xml:space="preserve">
+    <value>Passwords must have at least one lowercase ('a'-'z').</value>
+  </data>
+  <data name="PasswordRequiresNonAlphanumeric" xml:space="preserve">
+    <value>Passwords must have at least one non alphanumeric character.</value>
+  </data>
+  <data name="PasswordRequiresUpper" xml:space="preserve">
+    <value>Passwords must have at least one uppercase ('A'-'Z').</value>
+  </data>
+  <data name="PasswordTooShort" xml:space="preserve">
+    <value>Passwords must be at least {length} characters.</value>
+  </data>
+  <data name="RequiredError" xml:space="preserve">
+    <value>Input is required.</value>
+  </data>
+  <data name="StringLengthError" xml:space="preserve">
+    <value>The {0} must be between {1} - {2} characters long.</value>
+  </data>
+  <data name="UserAlreadyHasPassword" xml:space="preserve">
+    <value>User already has a password set.</value>
+  </data>
+  <data name="UserAlreadyInRole" xml:space="preserve">
+    <value>User already in role '{role}'.</value>
+  </data>
+  <data name="UserLockoutNotEnabled" xml:space="preserve">
+    <value>Lockout is not enabled for this user.</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="UserNotInRole" xml:space="preserve">
+    <value>User is not in role '{role}'.</value>
   </data>
 </root>

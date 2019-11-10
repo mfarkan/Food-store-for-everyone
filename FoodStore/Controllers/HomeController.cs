@@ -15,10 +15,10 @@ using Microsoft.AspNetCore.Http;
 
 namespace FoodStore.Controllers
 {
+    [AutoValidateAntiforgeryToken]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        readonly UserManager<ApplicationUser> _userManager;
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
