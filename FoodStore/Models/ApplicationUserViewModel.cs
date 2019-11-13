@@ -1,4 +1,5 @@
-﻿using FoodStore.Resources;
+﻿using FoodStore.Core.Enumarations;
+using FoodStore.Resources;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -32,5 +33,17 @@ namespace FoodStore.Models
         [Display(Name = "ComparePassword")]
         [Compare("PassWord", ErrorMessage = "ComparePasswordError")]
         public string ComparePassword { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredError")]
+        [Display(Name = "Gender")]
+        public Gender Sex { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredError")]
+        public string PhonePrefix { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredError")]
+        [StringLength(maximumLength: 15, MinimumLength = 10, ErrorMessage = "StringLengthError")]
+        [Display(Name = "PhoneNumber")]
+        public string PhoneNumber { get; set; }
     }
 }

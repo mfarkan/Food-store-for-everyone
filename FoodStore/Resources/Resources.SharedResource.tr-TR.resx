@@ -141,11 +141,20 @@
   <data name="Email" xml:space="preserve">
     <value>Mail Adres</value>
   </data>
+  <data name="Female" xml:space="preserve">
+    <value>Kadın</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Cinsiyet</value>
+  </data>
   <data name="InvalidEmail" xml:space="preserve">
     <value>Girilen email '{0}' geçersiz.</value>
   </data>
   <data name="InvalidEmailError" xml:space="preserve">
     <value>Lütfen geçerli bir mail adresi giriniz.</value>
+  </data>
+  <data name="InvalidPhoneNumber" xml:space="preserve">
+    <value>Geçersiz telefon numarası.</value>
   </data>
   <data name="InvalidRoleName" xml:space="preserve">
     <value>Girilen rol '{0}' geçersiz.</value>
@@ -158,6 +167,12 @@
   </data>
   <data name="LoginAlreadyAssociated" xml:space="preserve">
     <value>Bu kullanıcı daha önceden giriş yaptı.</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Erkek</value>
+  </data>
+  <data name="OptionLabel" xml:space="preserve">
+    <value>Seçiniz.</value>
   </data>
   <data name="PassWord" xml:space="preserve">
     <value>Şifre</value>
@@ -180,11 +195,14 @@
   <data name="PasswordTooShort" xml:space="preserve">
     <value>Şifre en az '{0}' karakterde olmalıdır.</value>
   </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Telefon Numarası</value>
+  </data>
   <data name="RequiredError" xml:space="preserve">
     <value>Zorunlu alan.</value>
   </data>
   <data name="StringLengthError" xml:space="preserve">
-    <value>{0} alanı {1} ila {2} karakter uzunluğunda olmalıdır.</value>
+    <value>{0} alanı {2} ila {1} karakter uzunluğunda olmalıdır.</value>
   </data>
   <data name="UserAlreadyHasPassword" xml:space="preserve">
     <value>Kullanıcı için şifre daha önceden kaydedilmiş.</value>

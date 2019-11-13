@@ -44,6 +44,7 @@ namespace FoodStore
             {
                 options.UseNpgsql(Configuration.GetConnectionString("UserDefaultConnection"), sql => sql.MigrationsAssembly(migrationAssembly));
             });
+            #region Identity
             services.AddIdentity<ApplicationUser, ApplicationRole>(option =>
             {
                 option.Lockout = new LockoutOptions
@@ -65,6 +66,8 @@ namespace FoodStore
                 };
             }).AddErrorDescriber<CustomErrorDescriber>().AddDefaultTokenProviders()
             .AddEntityFrameworkStores<UserManagementDbContext>();
+            #endregion
+            services.AddNotificationExtensions();
             services.ConfigureApplicationCookie(option =>
             {
                 option.LoginPath = new PathString("/User/SignIn");

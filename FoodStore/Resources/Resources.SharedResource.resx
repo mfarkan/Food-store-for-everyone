@@ -141,11 +141,20 @@
   <data name="Email" xml:space="preserve">
     <value>Email Address</value>
   </data>
+  <data name="Female" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
   <data name="InvalidEmail" xml:space="preserve">
     <value>Email '{0}' is invalid.</value>
   </data>
   <data name="InvalidEmailError" xml:space="preserve">
     <value>Please enter valid an email address.</value>
+  </data>
+  <data name="InvalidPhoneNumber" xml:space="preserve">
+    <value>Invalid phone number.</value>
   </data>
   <data name="InvalidRoleName" xml:space="preserve">
     <value>Role name '{0}' is invalid.</value>
@@ -158,6 +167,12 @@
   </data>
   <data name="LoginAlreadyAssociated" xml:space="preserve">
     <value>A user with this login already exists.</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="OptionLabel" xml:space="preserve">
+    <value>Select a value.</value>
   </data>
   <data name="PassWord" xml:space="preserve">
     <value>Password</value>
@@ -180,11 +195,14 @@
   <data name="PasswordTooShort" xml:space="preserve">
     <value>Passwords must be at least '{0}' characters.</value>
   </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
   <data name="RequiredError" xml:space="preserve">
     <value>Input is required.</value>
   </data>
   <data name="StringLengthError" xml:space="preserve">
-    <value>The {0} must be between {1} - {2} characters long.</value>
+    <value>The {0} must be between {2} - {1} characters long.</value>
   </data>
   <data name="UserAlreadyHasPassword" xml:space="preserve">
     <value>User already has a password set.</value>

@@ -133,6 +133,24 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Female.
+        /// </summary>
+        public static string Female {
+            get {
+                return ResourceManager.GetString("Female", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gender.
+        /// </summary>
+        public static string Gender {
+            get {
+                return ResourceManager.GetString("Gender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email &apos;{0}&apos; is invalid..
         /// </summary>
         public static string InvalidEmail {
@@ -147,6 +165,15 @@ namespace FoodStore.Resources {
         public static string InvalidEmailError {
             get {
                 return ResourceManager.GetString("InvalidEmailError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid phone number..
+        /// </summary>
+        public static string InvalidPhoneNumber {
+            get {
+                return ResourceManager.GetString("InvalidPhoneNumber", resourceCulture);
             }
         }
         
@@ -183,6 +210,24 @@ namespace FoodStore.Resources {
         public static string LoginAlreadyAssociated {
             get {
                 return ResourceManager.GetString("LoginAlreadyAssociated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Male.
+        /// </summary>
+        public static string Male {
+            get {
+                return ResourceManager.GetString("Male", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a value..
+        /// </summary>
+        public static string OptionLabel {
+            get {
+                return ResourceManager.GetString("OptionLabel", resourceCulture);
             }
         }
         
@@ -250,6 +295,15 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Phone Number.
+        /// </summary>
+        public static string PhoneNumber {
+            get {
+                return ResourceManager.GetString("PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Input is required..
         /// </summary>
         public static string RequiredError {
@@ -259,7 +313,7 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The {0} must be between {1} - {2} characters long..
+        ///   Looks up a localized string similar to The {0} must be between {2} - {1} characters long..
         /// </summary>
         public static string StringLengthError {
             get {

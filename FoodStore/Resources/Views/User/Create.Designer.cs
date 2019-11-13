@@ -77,5 +77,14 @@ namespace FoodStore.Resources.Views.User {
                 return ResourceManager.GetString("Email", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We&apos;ll never share your email with anyone else..
+        /// </summary>
+        public static string emailHelp {
+            get {
+                return ResourceManager.GetString("emailHelp", resourceCulture);
+            }
+        }
     }
 }

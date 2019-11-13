@@ -123,4 +123,7 @@
   <data name="Email" xml:space="preserve">
     <value>Mail Adres</value>
   </data>
+  <data name="emailHelp" xml:space="preserve">
+    <value>Email bilginizin herhangi bir kişiyle paylaşımı söz konusu değildir.</value>
+  </data>
 </root>
