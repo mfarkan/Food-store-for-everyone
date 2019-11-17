@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using FoodStore.Core.ServiceInterfaces;
 using FoodStore.Domain.UserManagement;
 using FoodStore.Models;
@@ -30,19 +31,25 @@ namespace FoodStore.Controllers
         public async Task<IActionResult> ActivateUser(string userId, string token)
         {
             var appUser = await _userManager.FindByIdAsync(userId);
-            var result = await _userManager.ConfirmEmailAsync(appUser, token);
+            await _userManager.SetLockoutEnabledAsync(appUser, true);
+            var result = await _userManager.ConfirmEmailAsync(appUser, HttpUtility.UrlDecode(token));
             if (result.Errors.Any())
             {
                 result.Errors.ToList().ForEach(e => ModelState.AddModelError(e.Code, e.Description));
             }
             return View();
         }
+        [NonAction]
+        private string EmailMessage(string userId, string token)
+        {
+            return $"<a target=\"_blank\" href=\"http://localhost:58889{Url.Action("ActivateUser", "User", new { userId, token = HttpUtility.UrlEncode(token) })}\">Kullanıcınızı doğrulamak için tıklayınız.</a>";
+        }
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(ApplicationUserViewModel user)
+        public async Task<IActionResult> Create(CreateUserViewModel user)
         {
             if (ModelState.IsValid)
             {
@@ -65,18 +72,18 @@ namespace FoodStore.Controllers
                 {
                     var appUser = await _userManager.FindByNameAsync(applicationUser.UserName);
                     var token = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
-                    await _messageSender.SendEmailAsync(token);
+                    await _messageSender.SendEmailAsync(appUser.Email, "Confirmation Mail For Your Account", this.EmailMessage(appUser.Id.ToString(), token));
                     return Redirect("~/");
                 }
             }
             return View();
         }
-        public IActionResult Update()
+        public IActionResult Update(string userId)
         {
             return View();
         }
         [HttpPut]
-        public IActionResult Update(string user)
+        public IActionResult Update()
         {
             return View();
         }
@@ -95,21 +102,12 @@ namespace FoodStore.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult SignIn(ApplicationUserViewModel userViewModel)
+        public IActionResult SignIn(CreateUserViewModel userViewModel)
         {
             if (ModelState.IsValid)
             {
 
             }
-            return View();
-        }
-        public IActionResult SignUp()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult SignUp(string user)
-        {
             return View();
         }
     }

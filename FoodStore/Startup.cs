@@ -1,15 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using FoodStore.Core.Extensions;
+using FoodStore.Core.MessageOptions;
 using FoodStore.Describer;
-using FoodStore.Domain.DataLayer;
 using FoodStore.Domain.DataLayer.Infrastructure;
 using FoodStore.Domain.UserManagement;
 using FoodStore.Resources;
+using FoodStore.Validators;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -20,7 +19,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Localization;
 
 namespace FoodStore
 {
@@ -51,6 +49,7 @@ namespace FoodStore
                 {
                     MaxFailedAccessAttempts = Convert.ToInt32(Configuration.GetCustomerMaxFailedAccessAttempts()),
                     DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10),
+                    AllowedForNewUsers = true,
                 };
                 option.Password = new PasswordOptions
                 {
@@ -64,7 +63,7 @@ namespace FoodStore
                 {
                     RequireUniqueEmail = true,
                 };
-            }).AddErrorDescriber<CustomErrorDescriber>().AddDefaultTokenProviders()
+            }).AddErrorDescriber<CustomErrorDescriber>().AddDefaultTokenProviders().AddPasswordValidator<CustomPasswordValidator>()
             .AddEntityFrameworkStores<UserManagementDbContext>();
             #endregion
             services.AddNotificationExtensions();
@@ -77,7 +76,7 @@ namespace FoodStore
                     HttpOnly = false,
                     SameSite = SameSiteMode.Lax,
                     SecurePolicy = CookieSecurePolicy.Always,
-                    Name = "IdentityCookie"
+                    Name = "IdentityCookie",
                 };
                 option.SlidingExpiration = true;
             });
@@ -94,6 +93,7 @@ namespace FoodStore
                     return factory.Create(typeof(SharedResource));
                 };
             }).AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix);
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -121,14 +121,12 @@ namespace FoodStore
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-
         }
     }
 }

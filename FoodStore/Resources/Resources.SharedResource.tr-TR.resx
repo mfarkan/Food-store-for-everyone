@@ -177,6 +177,9 @@
   <data name="PassWord" xml:space="preserve">
     <value>Şifre</value>
   </data>
+  <data name="PasswordContainsUserName" xml:space="preserve">
+    <value>Şifre içerisinde kulanıcı adı geçmektedir.</value>
+  </data>
   <data name="PasswordMismatch" xml:space="preserve">
     <value>Geçersiz şifre.</value>
   </data>

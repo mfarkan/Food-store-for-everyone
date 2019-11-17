@@ -241,6 +241,15 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password contains username..
+        /// </summary>
+        public static string PasswordContainsUserName {
+            get {
+                return ResourceManager.GetString("PasswordContainsUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incorrect password..
         /// </summary>
         public static string PasswordMismatch {

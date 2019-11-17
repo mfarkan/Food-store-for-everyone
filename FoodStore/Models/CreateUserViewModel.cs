@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FoodStore.Models
 {
-    public class ApplicationUserViewModel
+    public class CreateUserViewModel
     {
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredError")]

@@ -7,7 +7,7 @@ namespace FoodStore.Core.ServiceInterfaces
 {
     public interface IMessageSender
     {
-        Task SendEmailAsync(string verificationToken);
+        Task<bool> SendEmailAsync(string toEmail, string subject, string message);
         Task SendSmsAsync();
     }
 }

@@ -177,6 +177,9 @@
   <data name="PassWord" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="PasswordContainsUserName" xml:space="preserve">
+    <value>Password contains username.</value>
+  </data>
   <data name="PasswordMismatch" xml:space="preserve">
     <value>Incorrect password.</value>
   </data>

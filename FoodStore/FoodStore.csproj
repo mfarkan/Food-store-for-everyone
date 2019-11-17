@@ -35,11 +35,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Infrastructure\" />
-  </ItemGroup>
-
-
-  <ItemGroup>
     <None Include="Resources\Views\Home\Index.resx" />
   </ItemGroup>
 

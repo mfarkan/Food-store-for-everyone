@@ -46,6 +46,29 @@ namespace FoodStore.Domain.DataLayer.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
+            modelBuilder.Entity("FoodStore.Domain.UserManagement.ApplicationRoleClaims", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
+                });
+
             modelBuilder.Entity("FoodStore.Domain.UserManagement.ApplicationUser", b =>
                 {
                     b.Property<Guid>("Id")
@@ -117,30 +140,7 @@ namespace FoodStore.Domain.DataLayer.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+            modelBuilder.Entity("FoodStore.Domain.UserManagement.ApplicationUserClaims", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -163,7 +163,7 @@ namespace FoodStore.Domain.DataLayer.Migrations
                     b.ToTable("AspNetUserClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+            modelBuilder.Entity("FoodStore.Domain.UserManagement.ApplicationUserLogin", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("text");
@@ -184,7 +184,7 @@ namespace FoodStore.Domain.DataLayer.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+            modelBuilder.Entity("FoodStore.Domain.UserManagement.ApplicationUserRole", b =>
                 {
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -199,7 +199,7 @@ namespace FoodStore.Domain.DataLayer.Migrations
                     b.ToTable("AspNetUserRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+            modelBuilder.Entity("FoodStore.Domain.UserManagement.ApplicationUserTokens", b =>
                 {
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -218,7 +218,7 @@ namespace FoodStore.Domain.DataLayer.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+            modelBuilder.Entity("FoodStore.Domain.UserManagement.ApplicationRoleClaims", b =>
                 {
                     b.HasOne("FoodStore.Domain.UserManagement.ApplicationRole", null)
                         .WithMany()
@@ -227,7 +227,7 @@ namespace FoodStore.Domain.DataLayer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+            modelBuilder.Entity("FoodStore.Domain.UserManagement.ApplicationUserClaims", b =>
                 {
                     b.HasOne("FoodStore.Domain.UserManagement.ApplicationUser", null)
                         .WithMany()
@@ -236,7 +236,7 @@ namespace FoodStore.Domain.DataLayer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+            modelBuilder.Entity("FoodStore.Domain.UserManagement.ApplicationUserLogin", b =>
                 {
                     b.HasOne("FoodStore.Domain.UserManagement.ApplicationUser", null)
                         .WithMany()
@@ -245,7 +245,7 @@ namespace FoodStore.Domain.DataLayer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+            modelBuilder.Entity("FoodStore.Domain.UserManagement.ApplicationUserRole", b =>
                 {
                     b.HasOne("FoodStore.Domain.UserManagement.ApplicationRole", null)
                         .WithMany()
@@ -260,7 +260,7 @@ namespace FoodStore.Domain.DataLayer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+            modelBuilder.Entity("FoodStore.Domain.UserManagement.ApplicationUserTokens", b =>
                 {
                     b.HasOne("FoodStore.Domain.UserManagement.ApplicationUser", null)
                         .WithMany()
