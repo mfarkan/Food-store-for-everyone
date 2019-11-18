@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
-<h1>Create</h1>
+<h1>Sign Up</h1>
 
 <form asp-action="Create" asp-controller="User" class="form-group" autocomplete="off">
     <div asp-validation-summary="ModelOnly">
@@ -13,7 +13,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-3">
-            @sharedLocalizer["Email"]
+            @Html.LabelFor(model => model.Email)
         </div>
         <div class="col-md-3">
             @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
@@ -25,7 +25,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-3">
-            @sharedLocalizer["UserName"]
+            @Html.LabelFor(model => model.UserName)
         </div>
         <div class="col-md-3">
             @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
@@ -36,7 +36,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-3">
-            @sharedLocalizer["PassWord"]
+            @Html.LabelFor(model => model.PassWord)
         </div>
         <div class="col-md-3">
             @Html.EditorFor(model => model.PassWord, new { htmlAttributes = new { @class = "form-control" } })
@@ -47,7 +47,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-3">
-            @sharedLocalizer["ComparePassword"]
+            @Html.LabelFor(model => model.ComparePassword)
         </div>
         <div class="col-md-3">
             @Html.EditorFor(model => model.ComparePassword, new { htmlAttributes = new { @class = "form-control" } })
@@ -58,7 +58,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-3">
-            @sharedLocalizer["Gender"]
+            @Html.LabelFor(model => model.Sex)
         </div>
         <div class="col-md-3">
             @Html.DropDownListFor(q => q.Sex, Html.GetEnumSelectList(typeof(Gender)), sharedLocalizer["OptionLabel"], new { @class = "form-control" })
@@ -69,7 +69,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-3">
-            @sharedLocalizer["PhoneNumber"]
+            @Html.LabelFor(model => model.PhoneNumber)
         </div>
         <div class="col-md-3">
             <select asp-for="PhonePrefix" class="form-control">
@@ -92,6 +92,6 @@
             @Html.ValidationMessageFor(model => model.PhonePrefix, "", new { @class = "text-danger" })
         </div>
     </div>
-    <button type="submit" class="btn btn-info">Kaydet</button>
-    <button type="reset" class="btn btn-warning">Temizle</button>
+    <button type="submit" class="btn btn-info">@sharedLocalizer["Save"]</button>
+    <button type="reset" class="btn btn-warning">@sharedLocalizer["Clean"]</button>
 </form>

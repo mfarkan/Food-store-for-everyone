@@ -9,6 +9,7 @@ using FoodStore.Domain.DataLayer.Infrastructure;
 using FoodStore.Domain.UserManagement;
 using FoodStore.Resources;
 using FoodStore.Validators;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -45,6 +46,10 @@ namespace FoodStore
             #region Identity
             services.AddIdentity<ApplicationUser, ApplicationRole>(option =>
             {
+                option.SignIn = new SignInOptions()
+                {
+                    RequireConfirmedEmail = true,
+                };
                 option.Lockout = new LockoutOptions
                 {
                     MaxFailedAccessAttempts = Convert.ToInt32(Configuration.GetCustomerMaxFailedAccessAttempts()),
@@ -67,18 +72,14 @@ namespace FoodStore
             .AddEntityFrameworkStores<UserManagementDbContext>();
             #endregion
             services.AddNotificationExtensions();
-            services.ConfigureApplicationCookie(option =>
+            services.ConfigureApplicationCookie(options =>
             {
-                option.LoginPath = new PathString("/User/SignIn");
-                option.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-                option.Cookie = new CookieBuilder
-                {
-                    HttpOnly = false,
-                    SameSite = SameSiteMode.Lax,
-                    SecurePolicy = CookieSecurePolicy.Always,
-                    Name = "IdentityCookie",
-                };
-                option.SlidingExpiration = true;
+                options.Cookie.Name = Configuration.GetCookieName();
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+                options.LoginPath = "/User/SignIn";
+                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                options.SlidingExpiration = true;
             });
             services.AddLocalization(o =>
             {
@@ -93,6 +94,7 @@ namespace FoodStore
                     return factory.Create(typeof(SharedResource));
                 };
             }).AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix);
+
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
         }
 
@@ -119,6 +121,8 @@ namespace FoodStore
 
             app.UseStaticFiles();
             app.UseRouting();
+
+            app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

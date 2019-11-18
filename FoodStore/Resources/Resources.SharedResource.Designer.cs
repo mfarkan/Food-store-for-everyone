@@ -61,6 +61,24 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check your credentials..
+        /// </summary>
+        public static string CheckYourLogin {
+            get {
+                return ResourceManager.GetString("CheckYourLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clean.
+        /// </summary>
+        public static string Clean {
+            get {
+                return ResourceManager.GetString("Clean", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm Password.
         /// </summary>
         public static string ComparePassword {
@@ -129,6 +147,15 @@ namespace FoodStore.Resources {
         public static string Email {
             get {
                 return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string Enter {
+            get {
+                return ResourceManager.GetString("Enter", resourceCulture);
             }
         }
         
@@ -313,11 +340,29 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remember me.
+        /// </summary>
+        public static string RememberMe {
+            get {
+                return ResourceManager.GetString("RememberMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Input is required..
         /// </summary>
         public static string RequiredError {
             get {
                 return ResourceManager.GetString("RequiredError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
         
@@ -345,6 +390,15 @@ namespace FoodStore.Resources {
         public static string UserAlreadyInRole {
             get {
                 return ResourceManager.GetString("UserAlreadyInRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your account has been locked.
+        /// </summary>
+        public static string UserLocked {
+            get {
+                return ResourceManager.GetString("UserLocked", resourceCulture);
             }
         }
         

@@ -12,5 +12,9 @@ namespace FoodStore.Core.Extensions
         {
             return config.GetSection("UserLockConfig")["MaxAttempts"];
         }
+        public static string GetCookieName(this IConfiguration config)
+        {
+            return config.GetValue<string>("CookieName");
+        }
     }
 }

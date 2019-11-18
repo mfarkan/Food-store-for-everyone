@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using FoodStore.Core.Extensions;
 using FoodStore.Core.ServiceInterfaces;
 using FoodStore.Domain.UserManagement;
 using FoodStore.Models;
+using FoodStore.Resources;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 
 namespace FoodStore.Controllers
 {
@@ -17,10 +22,15 @@ namespace FoodStore.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IMessageSender _messageSender;
-        public UserController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IMessageSender messageSender)
+        private readonly IStringLocalizer<SharedResource> _localizer;
+        private readonly IConfiguration configuration;
+        public UserController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
+            IMessageSender messageSender, IStringLocalizer<SharedResource> localizer, IConfiguration config)
         {
+            configuration = config;
             _messageSender = messageSender;
             _userManager = userManager;
+            _localizer = localizer;
             _signInManager = signInManager;
         }
         #region User
@@ -31,7 +41,6 @@ namespace FoodStore.Controllers
         public async Task<IActionResult> ActivateUser(string userId, string token)
         {
             var appUser = await _userManager.FindByIdAsync(userId);
-            await _userManager.SetLockoutEnabledAsync(appUser, true);
             var result = await _userManager.ConfirmEmailAsync(appUser, HttpUtility.UrlDecode(token));
             if (result.Errors.Any())
             {
@@ -97,16 +106,46 @@ namespace FoodStore.Controllers
             return View();
         }
         #endregion
-        public IActionResult SignIn()
+        public IActionResult SignIn(string ReturnUrl)
         {
             return View();
         }
         [HttpPost]
-        public IActionResult SignIn(CreateUserViewModel userViewModel)
+        public async Task<IActionResult> SignIn([FromForm]LoginUserViewModel userViewModel, string ReturnUrl)
         {
             if (ModelState.IsValid)
             {
-
+                var user = await _userManager.FindByNameAsync(userViewModel.UserName);
+                if (user != null)
+                {
+                    await _signInManager.SignOutAsync();
+                    var result = await _signInManager.PasswordSignInAsync(user, userViewModel.PassWord, userViewModel.Persistent, true);
+                    if (result.Succeeded)
+                    {
+                        await _userManager.ResetAccessFailedCountAsync(user);
+                        if (!string.IsNullOrEmpty(ReturnUrl))
+                            return Redirect(ReturnUrl);
+                        return Redirect("~/");
+                    }
+                    else if (result.IsLockedOut)
+                    {
+                        await _userManager.AccessFailedAsync(user);
+                        var failedCount = await _userManager.GetAccessFailedCountAsync(user);
+                        if (failedCount == Convert.ToInt32(configuration.GetCustomerMaxFailedAccessAttempts()))
+                        {
+                            await _userManager.SetLockoutEndDateAsync(user, new DateTimeOffset(DateTime.Now.AddMinutes(10)));
+                        }
+                        ModelState.AddModelError("UserLocked", _localizer["UserLocked"]);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("CheckYourLogin", _localizer["CheckYourLogin"]);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("CheckYourLogin", _localizer["CheckYourLogin"]);
+                }
             }
             return View();
         }

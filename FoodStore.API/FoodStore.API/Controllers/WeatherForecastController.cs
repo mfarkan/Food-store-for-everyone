@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace WebApplication1.Controllers
 {
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
@@ -22,10 +26,10 @@ namespace WebApplication1.Controllers
         {
             _logger = logger;
         }
-
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            var user = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

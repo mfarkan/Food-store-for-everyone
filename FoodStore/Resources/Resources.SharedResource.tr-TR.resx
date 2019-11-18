@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CheckYourLogin" xml:space="preserve">
+    <value>Kullanıcı bilgilerinizi kontrol ediniz.</value>
+  </data>
+  <data name="Clean" xml:space="preserve">
+    <value>Temizle</value>
+  </data>
   <data name="ComparePassword" xml:space="preserve">
     <value>Şifre Doğrulama</value>
   </data>
@@ -140,6 +146,9 @@
   </data>
   <data name="Email" xml:space="preserve">
     <value>Mail Adres</value>
+  </data>
+  <data name="Enter" xml:space="preserve">
+    <value>Giriş</value>
   </data>
   <data name="Female" xml:space="preserve">
     <value>Kadın</value>
@@ -201,8 +210,14 @@
   <data name="PhoneNumber" xml:space="preserve">
     <value>Telefon Numarası</value>
   </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Beni hatırla</value>
+  </data>
   <data name="RequiredError" xml:space="preserve">
     <value>Zorunlu alan.</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Kaydet</value>
   </data>
   <data name="StringLengthError" xml:space="preserve">
     <value>{0} alanı {2} ila {1} karakter uzunluğunda olmalıdır.</value>
@@ -212,6 +227,9 @@
   </data>
   <data name="UserAlreadyInRole" xml:space="preserve">
     <value>Kullanıcı da '{0}' rolü mevcut.</value>
+  </data>
+  <data name="UserLocked" xml:space="preserve">
+    <value>Kullanıcınız kilitlenmiş gözükmektedir.</value>
   </data>
   <data name="UserLockoutNotEnabled" xml:space="preserve">
     <value>Bu kullanıcı için lock işlemi aktif değil.</value>
