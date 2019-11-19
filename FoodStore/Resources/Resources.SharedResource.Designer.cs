@@ -61,6 +61,15 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fail login count..
+        /// </summary>
+        public static string AccessFailedCount {
+            get {
+                return ResourceManager.GetString("AccessFailedCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check your credentials..
         /// </summary>
         public static string CheckYourLogin {
@@ -102,6 +111,15 @@ namespace FoodStore.Resources {
         public static string ConcurrencyFailure {
             get {
                 return ResourceManager.GetString("ConcurrencyFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Date.
+        /// </summary>
+        public static string CreatedAt {
+            get {
+                return ResourceManager.GetString("CreatedAt", resourceCulture);
             }
         }
         
@@ -151,6 +169,15 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is email confirm?.
+        /// </summary>
+        public static string EmailConfirm {
+            get {
+                return ResourceManager.GetString("EmailConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string Enter {
@@ -174,6 +201,15 @@ namespace FoodStore.Resources {
         public static string Gender {
             get {
                 return ResourceManager.GetString("Gender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id.
+        /// </summary>
+        public static string Id {
+            get {
+                return ResourceManager.GetString("Id", resourceCulture);
             }
         }
         
@@ -336,6 +372,15 @@ namespace FoodStore.Resources {
         public static string PhoneNumber {
             get {
                 return ResourceManager.GetString("PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is phone number confirm?.
+        /// </summary>
+        public static string PhoneNumberConfirm {
+            get {
+                return ResourceManager.GetString("PhoneNumberConfirm", resourceCulture);
             }
         }
         

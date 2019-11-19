@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccessFailedCount" xml:space="preserve">
+    <value>Başarısız giriş</value>
+  </data>
   <data name="CheckYourLogin" xml:space="preserve">
     <value>Kullanıcı bilgilerinizi kontrol ediniz.</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="ConcurrencyFailure" xml:space="preserve">
     <value>Data eşleşme problemi , nesne değiştirilmiş.</value>
+  </data>
+  <data name="CreatedAt" xml:space="preserve">
+    <value>Kayıt Tarihi</value>
   </data>
   <data name="DefaultError" xml:space="preserve">
     <value>Beklenmeyen bir hata oluştu.</value>
@@ -147,6 +153,9 @@
   <data name="Email" xml:space="preserve">
     <value>Mail Adres</value>
   </data>
+  <data name="EmailConfirm" xml:space="preserve">
+    <value>Email doğrulandı mı ?</value>
+  </data>
   <data name="Enter" xml:space="preserve">
     <value>Giriş</value>
   </data>
@@ -155,6 +164,9 @@
   </data>
   <data name="Gender" xml:space="preserve">
     <value>Cinsiyet</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>Id</value>
   </data>
   <data name="InvalidEmail" xml:space="preserve">
     <value>Girilen email '{0}' geçersiz.</value>
@@ -209,6 +221,9 @@
   </data>
   <data name="PhoneNumber" xml:space="preserve">
     <value>Telefon Numarası</value>
+  </data>
+  <data name="PhoneNumberConfirm" xml:space="preserve">
+    <value>Telefon doğrulandı mı ?</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Beni hatırla</value>

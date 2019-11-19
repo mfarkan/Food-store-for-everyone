@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using AutoMapper;
 using FoodStore.Core.Extensions;
 using FoodStore.Core.ServiceInterfaces;
 using FoodStore.Domain.UserManagement;
@@ -22,12 +23,14 @@ namespace FoodStore.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IMessageSender _messageSender;
+        private readonly IMapper _mapper;
         private readonly IStringLocalizer<SharedResource> _localizer;
         private readonly IConfiguration configuration;
         public UserController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
-            IMessageSender messageSender, IStringLocalizer<SharedResource> localizer, IConfiguration config)
+            IMessageSender messageSender, IStringLocalizer<SharedResource> localizer, IConfiguration config, IMapper mapper)
         {
             configuration = config;
+            _mapper = mapper;
             _messageSender = messageSender;
             _userManager = userManager;
             _localizer = localizer;
@@ -36,7 +39,9 @@ namespace FoodStore.Controllers
         #region User
         public IActionResult Index()
         {
-            return View();
+            var userList = _userManager.Users.ToList();
+            IEnumerable<ApplicationUserViewModel> appUsers = _mapper.Map<List<ApplicationUser>, List<ApplicationUserViewModel>>(userList);
+            return View(appUsers);
         }
         public async Task<IActionResult> ActivateUser(string userId, string token)
         {
@@ -108,6 +113,7 @@ namespace FoodStore.Controllers
         #endregion
         public IActionResult SignIn(string ReturnUrl)
         {
+            @ViewData["returnUrl"] = ReturnUrl;
             return View();
         }
         [HttpPost]
@@ -127,19 +133,26 @@ namespace FoodStore.Controllers
                             return Redirect(ReturnUrl);
                         return Redirect("~/");
                     }
-                    else if (result.IsLockedOut)
+                    else
                     {
                         await _userManager.AccessFailedAsync(user);
                         var failedCount = await _userManager.GetAccessFailedCountAsync(user);
                         if (failedCount == Convert.ToInt32(configuration.GetCustomerMaxFailedAccessAttempts()))
                         {
                             await _userManager.SetLockoutEndDateAsync(user, new DateTimeOffset(DateTime.Now.AddMinutes(10)));
+                            ModelState.AddModelError("UserLocked", _localizer["UserLocked"]);
                         }
-                        ModelState.AddModelError("UserLocked", _localizer["UserLocked"]);
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("CheckYourLogin", _localizer["CheckYourLogin"]);
+                        else
+                        {
+                            if (result.IsLockedOut)
+                            {
+                                ModelState.AddModelError("UserLocked", _localizer["UserLocked"]);
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("CheckYourLogin", _localizer["CheckYourLogin"]);
+                            }
+                        }
                     }
                 }
                 else

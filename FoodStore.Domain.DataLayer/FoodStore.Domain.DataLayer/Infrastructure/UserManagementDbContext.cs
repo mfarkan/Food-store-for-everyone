@@ -12,7 +12,6 @@ namespace FoodStore.Domain.DataLayer.Infrastructure
 {
     public class UserManagementDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid, ApplicationUserClaims, ApplicationUserRole, ApplicationUserLogin, ApplicationRoleClaims, ApplicationUserTokens>
     {
-        private Claim claim = new Claim("SuperAdmin", "true");
         public UserManagementDbContext(DbContextOptions<UserManagementDbContext> dbContext) : base(dbContext)
         {
         }

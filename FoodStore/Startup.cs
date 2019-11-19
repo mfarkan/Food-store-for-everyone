@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
+using AutoMapper;
+using FoodStore.Authorization.SuperAdminPolicy;
 using FoodStore.Core.Extensions;
 using FoodStore.Core.MessageOptions;
 using FoodStore.Describer;
@@ -10,6 +12,7 @@ using FoodStore.Domain.UserManagement;
 using FoodStore.Resources;
 using FoodStore.Validators;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -71,6 +74,11 @@ namespace FoodStore
             }).AddErrorDescriber<CustomErrorDescriber>().AddDefaultTokenProviders().AddPasswordValidator<CustomPasswordValidator>()
             .AddEntityFrameworkStores<UserManagementDbContext>();
             #endregion
+            services.AddAuthorization(option =>
+            {
+                option.AddPolicy("SuperAdmin", policy => policy.Requirements.Add(new SuperAdminRequirement()));
+            });
+            services.AddSingleton<IAuthorizationHandler, SuperAdminHandler>();
             services.AddNotificationExtensions();
             services.ConfigureApplicationCookie(options =>
             {
@@ -96,6 +104,8 @@ namespace FoodStore
             }).AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix);
 
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+            services.AddAutoMapper(typeof(Startup));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

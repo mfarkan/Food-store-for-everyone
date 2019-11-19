@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ApplicationUserViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+<table class="table table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(p => p.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(p => p.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(p => p.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(p => p.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(p => p.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(p => p.CreatedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(p => p.EmailConfirmed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(p => p.PhoneNumberConfirmed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(p => p.AccessFailedCount)
+        </th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.UserName</td>
+                <td>@item.Email</td>
+                <td>@item.PhoneNumber</td>
+                <td>
+                    @if (item.Gender == FoodStore.Core.Enumarations.Gender.Male)
+                    {
+                        <i class="fa-venus"></i>
+                    }
+                    else
+                    {
+                        <i class="fa-ice-cream"></i>
+                    }
+                </td>
+                <td>@item.CreatedAt</td>
+                <td>@item.EmailConfirmed</td>
+                <td>@item.PhoneNumberConfirmed</td>
+                <td>@item.AccessFailedCount</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
