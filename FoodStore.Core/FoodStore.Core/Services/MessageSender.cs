@@ -51,8 +51,6 @@ namespace FoodStore.Core.Services
 
         public Task SendSmsAsync()
         {
-
-
             return Task.FromResult(0);
         }
     }

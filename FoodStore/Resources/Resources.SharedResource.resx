@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AccessFailedCount" xml:space="preserve">
-    <value>Fail login count.</value>
+    <value>Fail Login Count</value>
   </data>
   <data name="CheckYourLogin" xml:space="preserve">
     <value>Check your credentials.</value>
@@ -154,7 +154,7 @@
     <value>Email Address</value>
   </data>
   <data name="EmailConfirm" xml:space="preserve">
-    <value>Is email confirm?</value>
+    <value>Email Confirm</value>
   </data>
   <data name="Enter" xml:space="preserve">
     <value>Login</value>
@@ -223,7 +223,7 @@
     <value>Phone Number</value>
   </data>
   <data name="PhoneNumberConfirm" xml:space="preserve">
-    <value>Is phone number confirm?</value>
+    <value>PhoneNumber Confirm</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember me</value>

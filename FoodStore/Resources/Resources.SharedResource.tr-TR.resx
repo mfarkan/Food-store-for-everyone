@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AccessFailedCount" xml:space="preserve">
-    <value>Başarısız giriş</value>
+    <value>Başarısız Giriş</value>
   </data>
   <data name="CheckYourLogin" xml:space="preserve">
     <value>Kullanıcı bilgilerinizi kontrol ediniz.</value>
@@ -154,7 +154,7 @@
     <value>Mail Adres</value>
   </data>
   <data name="EmailConfirm" xml:space="preserve">
-    <value>Email doğrulandı mı ?</value>
+    <value>Email Doğr.</value>
   </data>
   <data name="Enter" xml:space="preserve">
     <value>Giriş</value>
@@ -223,7 +223,7 @@
     <value>Telefon Numarası</value>
   </data>
   <data name="PhoneNumberConfirm" xml:space="preserve">
-    <value>Telefon doğrulandı mı ?</value>
+    <value>Telefon Doğr.</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Beni hatırla</value>

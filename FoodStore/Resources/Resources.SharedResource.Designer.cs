@@ -61,7 +61,7 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fail login count..
+        ///   Looks up a localized string similar to Fail Login Count.
         /// </summary>
         public static string AccessFailedCount {
             get {
@@ -169,7 +169,7 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is email confirm?.
+        ///   Looks up a localized string similar to Email Confirm.
         /// </summary>
         public static string EmailConfirm {
             get {
@@ -376,7 +376,7 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is phone number confirm?.
+        ///   Looks up a localized string similar to PhoneNumber Confirm.
         /// </summary>
         public static string PhoneNumberConfirm {
             get {
