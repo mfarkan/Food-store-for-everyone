@@ -29,7 +29,6 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            var user = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

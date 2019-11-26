@@ -49,7 +49,7 @@ namespace FoodStore
             #region Identity
             services.AddIdentity<ApplicationUser, ApplicationRole>(option =>
             {
-                option.SignIn = new SignInOptions()
+                option.SignIn = new SignInOptions
                 {
                     RequireConfirmedEmail = true,
                 };

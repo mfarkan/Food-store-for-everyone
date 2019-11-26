@@ -17,19 +17,19 @@ namespace FoodStore.Describer
         }
         public override IdentityError DuplicateUserName(string userName)
         {
-            return new IdentityError() { Code = "DuplicateUserName", Description = string.Format(_localizer["DuplicateUserName"], userName) };
+            return new IdentityError { Code = "DuplicateUserName", Description = string.Format(_localizer["DuplicateUserName"], userName) };
         }
         public override IdentityError DuplicateEmail(string email)
         {
-            return new IdentityError() { Code = "DuplicateEmail", Description = string.Format(_localizer["DuplicateEmail"], email) };
+            return new IdentityError { Code = "DuplicateEmail", Description = string.Format(_localizer["DuplicateEmail"], email) };
         }
         public override IdentityError DuplicateRoleName(string role)
         {
-            return new IdentityError() { Description = string.Format(_localizer["DuplicateRoleName"], role), Code = "DuplicateRoleName" };
+            return new IdentityError { Description = string.Format(_localizer["DuplicateRoleName"], role), Code = "DuplicateRoleName" };
         }
         public override IdentityError InvalidEmail(string email)
         {
-            return new IdentityError() { Code = "InvalidEmail", Description = string.Format(_localizer["InvalidEmail"], email) };
+            return new IdentityError { Code = "InvalidEmail", Description = string.Format(_localizer["InvalidEmail"], email) };
         }
         public override IdentityError InvalidUserName(string userName)
         {

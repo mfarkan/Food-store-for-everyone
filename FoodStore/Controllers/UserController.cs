@@ -67,7 +67,7 @@ namespace FoodStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser applicationUser = new ApplicationUser()
+                ApplicationUser applicationUser = new ApplicationUser
                 {
                     UserName = user.UserName,
                     Email = user.Email,
