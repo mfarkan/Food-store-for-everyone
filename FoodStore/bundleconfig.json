@@ -1,0 +1,23 @@
+[
+  {
+    "outputFileName": "wwwroot/js/_sharedScripts.js",
+    "inputFiles": [
+      "wwwroot/js/_sharedScripts.js",
+      "wwwroot/js/site.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/css/site.css",
+    "inputFiles": [
+      "wwwroot/css/site.css"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  }
+]

@@ -84,6 +84,7 @@ namespace FoodStore
             {
                 options.Cookie.Name = Configuration.GetCookieName();
                 options.Cookie.HttpOnly = true;
+                options.AccessDeniedPath = "/User/AccessDenied";
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
                 options.LoginPath = "/User/SignIn";
                 options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;

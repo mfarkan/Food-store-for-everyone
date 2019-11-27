@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - FoodStore</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="~/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/limonte-sweetalert2/sweetalert2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
@@ -53,6 +54,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/_sharedScripts.js" asp-append-version="true"></script>
+    <script src="~/limonte-sweetalert2/sweetalert2.all.min.js"></script>>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)

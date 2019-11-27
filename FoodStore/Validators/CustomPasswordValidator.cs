@@ -21,9 +21,10 @@ namespace FoodStore.Validators
         {
             List<IdentityError> errors = new List<IdentityError>();
 
-            if (password.ToLower().Contains(user.UserName.ToLower())) //Password içerisinde username kontrolü
-                errors.Add(new IdentityError { Code = "PasswordContainsUserName", Description = "Lütfen şifre içerisinde kullanıcı adını yazmayınız." });
-
+            if (password.ToLowerInvariant().Contains(user.UserName.ToLowerInvariant())) //Password içerisinde username kontrolü
+            {
+                errors.Add(new IdentityError { Code = "PasswordContainsUserName", Description = _localizer["PasswordContainsUserName"] });
+            }
             if (!errors.Any())
             {
                 return Task.FromResult(IdentityResult.Success);

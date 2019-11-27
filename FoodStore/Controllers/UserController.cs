@@ -101,16 +101,24 @@ namespace FoodStore.Controllers
         {
             return View();
         }
-        public IActionResult Delete()
-        {
-            return View();
-        }
         [HttpDelete]
-        public IActionResult Delete(string user)
+        public async Task<IActionResult> Delete(string userId)
         {
-            return View();
+            var appUser = await _userManager.FindByIdAsync(userId);
+            var response = await _userManager.DeleteAsync(appUser);
+            return new OkObjectResult(response);
         }
         #endregion
+        [HttpPost]
+        public async Task<IActionResult> SignOut()
+        {
+            await _signInManager.SignOutAsync();
+            return Ok();
+        }
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
         public IActionResult SignIn(string ReturnUrl)
         {
             @ViewData["returnUrl"] = ReturnUrl;

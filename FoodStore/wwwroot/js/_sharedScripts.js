@@ -1,47 +1,54 @@
-﻿window.EventListeners = [
-    {
-        name: 'onlyNumeric',
-        listeners: [
-            {
-                name: 'keydown',
-                func: 'onlyNumericKeyDown'
-            },
-            {
-                name: 'keyup',
-                func: 'onlyNumericKeyUp'
-            },
-        ]
-    }
-];
-var onlyNumericKeyDown = function (e) {
-    if ([46, 8, 9, 27, 13].indexOf(e.keyCode) !== -1 ||
-        // Allow: Ctrl+A
-        (e.keyCode === 65 && e.ctrlKey === true) ||
-        // Allow: Ctrl+C
-        (e.keyCode === 67 && e.ctrlKey === true) ||
-        // Allow: Ctrl+V
-        (e.keyCode === 86 && e.ctrlKey === true) ||
-        // Allow: Ctrl+X
-        (e.keyCode === 88 && e.ctrlKey === true) ||
-        // Allow: home, end, left, right
-        (e.keyCode >= 35 && e.keyCode <= 39)) {
-        // let it happen, don't do anything
-        return;
-    }
-    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-
-        e.preventDefault();
-
-    }
-    if (e.target && e.target.maxLength) {
-        const maxlength = +e.target.maxLength;
-        if (e.target.value && (e.target.value + '').length > maxlength) {
-            e.preventDefault();
+﻿/**
+ * Herhangi bir sayfa içerisinde çağırılan delete methodu.
+ * @param {any} swalTitle Ekranda çıkacak olan confirm mesajının title bilgisi.
+ * @param {any} deleteMessage başarılı silinme işleminde gözükecek başarılı mesajı.
+ * @param {any} confirmMessage ekranda çıkacak doğrulama mesajı
+ * @param {any} confirmButtonText onaylama butonu texti
+ * @param {any} cancelButtonText iptal etme butonu texti
+ * @param {any} successTitle başarılı silinme durumundaki title bilgisi
+ * @param {any} loadingTitle işlem yapılıyorken ki loading title bilgisi
+ * @param {any} loadingMessage işlem yapılıyorken lütfen bekleyiniz mesajı.
+ * @param {any} data işlem yapılacak data bilgisi (örn. id vb.)
+ * @param {any} url hangi endpointe gidilecek.
+ * @param {any} methodType method tipi (POST,DELETE vb.)
+ * @param {any} returnMethod eğer sayfa yönlendirmesi varsa buraya yönlendirilmeli.opsiyonel
+ */
+function DeleteDataWithConfirm(swalTitle, deleteMessage, confirmMessage, confirmButtonText, cancelButtonText, successTitle, loadingTitle, loadingMessage, data, url, methodType, returnMethod) {
+    Swal.fire({
+        title: swalTitle,
+        icon: 'question',
+        text: confirmMessage,
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: confirmButtonText,
+        cancelButtonText: cancelButtonText
+    }).then((result) => {
+        if (result.value) {
+            swal({
+                title: loadingTitle,
+                text: loadingMessage,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                onOpen: () => {
+                    swal.showLoading()
+                }
+            });
+            $.ajax({
+                type: methodType,
+                url: url,
+                data: data,
+                success: function (result) {
+                    if (result.IsSuccess) {
+                        Swal.fire(
+                            successTitle,
+                            deleteMessage,
+                            'success'
+                        );
+                    }
+                },
+            });
         }
-    }
-}
-var onlyNumericKeyUp = function (e) {
-    if (e.target.value) {
-        e.target.value = e.target.value.replace(/[^0-9]+/g, '');
-    }
+    })
 }
