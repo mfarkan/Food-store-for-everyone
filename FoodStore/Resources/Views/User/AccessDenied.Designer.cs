@@ -63,9 +63,9 @@ namespace FoodStore.Resources.Views.User {
         /// <summary>
         ///   Looks up a localized string similar to You do not have access to this resource..
         /// </summary>
-        public static string AccessDenied {
+        public static string AccessDeniedMessage {
             get {
-                return ResourceManager.GetString("AccessDenied", resourceCulture);
+                return ResourceManager.GetString("AccessDeniedMessage", resourceCulture);
             }
         }
     }
