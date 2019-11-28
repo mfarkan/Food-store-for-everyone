@@ -36,11 +36,11 @@ namespace FoodStore
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        // çeþitli conflarýn yer aldýðý kýsým DI da burda.
+        // ï¿½eï¿½itli conflarï¿½n yer aldï¿½ï¿½ï¿½ kï¿½sï¿½m DI da burda.
         public void ConfigureServices(IServiceCollection services)
         {
-            //target assembly ; üzerinde çeþitli operasyonlar yaptýðýn project PMC'de ne seçilirse o aslýnda.
-            //Migration assemblye ; Migrationlarýn codelarýnýn bulunduðu uygulama. böylece contextler baþka yerde tanýmlanýp baþka bir projede tutulabilir.
+            //target assembly ; ï¿½zerinde ï¿½eï¿½itli operasyonlar yaptï¿½ï¿½ï¿½n project PMC'de ne seï¿½ilirse o aslï¿½nda.
+            //Migration assemblye ; Migrationlarï¿½n codelarï¿½nï¿½n bulunduï¿½u uygulama. bï¿½ylece contextler baï¿½ka yerde tanï¿½mlanï¿½p baï¿½ka bir projede tutulabilir.
             var migrationAssembly = typeof(UserManagementDbContext).GetTypeInfo().Assembly.GetName().Name;
             services.AddDbContext<UserManagementDbContext>(options =>
             {
@@ -112,6 +112,7 @@ namespace FoodStore
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            Console.WriteLine(env.EnvironmentName);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

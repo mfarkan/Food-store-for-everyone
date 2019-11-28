@@ -252,6 +252,9 @@
   <data name="UserName" xml:space="preserve">
     <value>Kullanıcı Adı</value>
   </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>Kullanıcı bulunamadı.</value>
+  </data>
   <data name="UserNotInRole" xml:space="preserve">
     <value>Kullanıcı da '{0}' rolü mevcut değil.</value>
   </data>

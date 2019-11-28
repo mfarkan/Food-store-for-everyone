@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using System.Web;
 using AutoMapper;
@@ -43,9 +44,18 @@ namespace FoodStore.Controllers
             IEnumerable<ApplicationUserViewModel> appUsers = _mapper.Map<List<ApplicationUser>, List<ApplicationUserViewModel>>(userList);
             return View(appUsers);
         }
-        public async Task<IActionResult> ActivateUser(string userId, string token)
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
+            if (userId == null || token == null)
+            {
+                return RedirectToPage("/~");
+            }
             var appUser = await _userManager.FindByIdAsync(userId);
+            if (appUser == null)
+            {
+                ModelState.AddModelError("UserNotFound", _localizer["UserNotFound"]);
+                return View();
+            }
             var result = await _userManager.ConfirmEmailAsync(appUser, HttpUtility.UrlDecode(token));
             if (result.Errors.Any())
             {
@@ -54,9 +64,9 @@ namespace FoodStore.Controllers
             return View();
         }
         [NonAction]
-        private string EmailMessage(string userId, string token)
+        private string EmailMessage(string callBackUrl)
         {
-            return $"<a target=\"_blank\" href=\"http://localhost:58889{Url.Action("ActivateUser", "User", new { userId, token = HttpUtility.UrlEncode(token) })}\">Kullanıcınızı doğrulamak için tıklayınız.</a>";
+            return $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callBackUrl)}'>clicking here</a>.";
         }
         public IActionResult Create()
         {
@@ -86,7 +96,13 @@ namespace FoodStore.Controllers
                 {
                     var appUser = await _userManager.FindByNameAsync(applicationUser.UserName);
                     var token = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
-                    await _messageSender.SendEmailAsync(appUser.Email, "Confirmation Mail For Your Account", this.EmailMessage(appUser.Id.ToString(), token));
+
+                    var callbackUrl = Url.Page(
+                        "/User/ConfirmEmail",
+                        pageHandler: null,
+                        values: new { userId = appUser.Id, code = token },
+                        protocol: Request.Scheme);
+                    await _messageSender.SendEmailAsync(appUser.Email, "Confirmation Mail For Your Account", this.EmailMessage(callbackUrl));
                     return Redirect("~/");
                 }
             }

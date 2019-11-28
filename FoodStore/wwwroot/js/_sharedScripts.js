@@ -16,11 +16,11 @@
 function DeleteDataWithConfirm(swalTitle, deleteMessage, confirmMessage, confirmButtonText, cancelButtonText, successTitle, loadingTitle, loadingMessage, data, url, methodType, returnMethod) {
     Swal.fire({
         title: swalTitle,
-        icon: 'question',
+        icon: "question",
         text: confirmMessage,
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
         confirmButtonText: confirmButtonText,
         cancelButtonText: cancelButtonText
     }).then((result) => {
@@ -44,7 +44,7 @@ function DeleteDataWithConfirm(swalTitle, deleteMessage, confirmMessage, confirm
                         Swal.fire(
                             successTitle,
                             deleteMessage,
-                            'success'
+                            "success"
                         );
                     }
                 },
