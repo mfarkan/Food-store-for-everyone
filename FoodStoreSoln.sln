@@ -10,13 +10,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".circleci", ".circleci", "{
 		config.yml = config.yml
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodStore.Core", "FoodStore.Core\FoodStore.Core\FoodStore.Core.csproj", "{33F5CECB-1A1F-4C35-9169-E0568DE86771}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodStore.Core", "FoodStore.Core\FoodStore.Core.csproj", "{33F5CECB-1A1F-4C35-9169-E0568DE86771}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodStore.Domain", "FoodStore.Domain\FoodStore.Domain\FoodStore.Domain.csproj", "{E0134C2D-4AF1-4C41-B4AD-F06D9955568D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodStore.Domain", "FoodStore.Domain\FoodStore.Domain.csproj", "{E0134C2D-4AF1-4C41-B4AD-F06D9955568D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodStore.Domain.DataLayer", "FoodStore.Domain.DataLayer\FoodStore.Domain.DataLayer\FoodStore.Domain.DataLayer.csproj", "{81B52388-134C-483D-ADCD-43F9A4488631}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodStore.Domain.DataLayer", "FoodStore.Domain.DataLayer\FoodStore.Domain.DataLayer.csproj", "{81B52388-134C-483D-ADCD-43F9A4488631}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodStore.API", "FoodStore.API\FoodStore.API\FoodStore.API.csproj", "{AA6D9EAA-EB88-4255-A0BB-A17FF8A04CFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodStore.API", "FoodStore.API\FoodStore.API.csproj", "{AA6D9EAA-EB88-4255-A0BB-A17FF8A04CFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

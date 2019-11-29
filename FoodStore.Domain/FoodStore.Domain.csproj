@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\FoodStore.Core\FoodStore.Core\FoodStore.Core.csproj" />
+    <ProjectReference Include="..\FoodStore.Core\FoodStore.Core.csproj" />
   </ItemGroup>
 
 </Project>

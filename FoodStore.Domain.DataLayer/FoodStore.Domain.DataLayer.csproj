@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\FoodStore.Core\FoodStore.Core\FoodStore.Core.csproj" />
-    <ProjectReference Include="..\..\FoodStore.Domain\FoodStore.Domain\FoodStore.Domain.csproj" />
+    <ProjectReference Include="..\FoodStore.Core\FoodStore.Core.csproj" />
+    <ProjectReference Include="..\FoodStore.Domain\FoodStore.Domain.csproj" />
   </ItemGroup>
 
 </Project>
