@@ -39,14 +39,16 @@ namespace FoodStore.Controllers
         {
             return View();
         }
-        public IActionResult Delete()
-        {
-            return View();
-        }
         [HttpDelete]
-        public IActionResult Delete(string role)
+        public async Task<IActionResult> Delete(string roleId)
         {
-            return View();
+            var appRole = await _roleManager.FindByIdAsync(roleId);
+            if (appRole == null)
+            {
+                return NotFound();
+            }
+            var response = await _roleManager.DeleteAsync(appRole);
+            return new OkObjectResult(response);
         }
         #endregion
     }

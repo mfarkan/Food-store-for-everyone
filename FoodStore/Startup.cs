@@ -36,11 +36,8 @@ namespace FoodStore
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        // �e�itli conflar�n yer ald��� k�s�m DI da burda.
         public void ConfigureServices(IServiceCollection services)
         {
-            //target assembly ; �zerinde �e�itli operasyonlar yapt���n project PMC'de ne se�ilirse o asl�nda.
-            //Migration assemblye ; Migrationlar�n codelar�n�n bulundu�u uygulama. b�ylece contextler ba�ka yerde tan�mlan�p ba�ka bir projede tutulabilir.
             var migrationAssembly = typeof(UserManagementDbContext).GetTypeInfo().Assembly.GetName().Name;
             services.AddDbContext<UserManagementDbContext>(options =>
             {
@@ -130,7 +127,6 @@ namespace FoodStore
                 SupportedCultures = supportedCultures,
                 RequestCultureProviders = new[] { new CookieRequestCultureProvider() },
             });
-
             app.UseStaticFiles();
             app.UseRouting();
 
