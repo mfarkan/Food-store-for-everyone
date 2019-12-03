@@ -31,14 +31,14 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\FoodStore.Core\FoodStore.Core.csproj" />
-    <ProjectReference Include="..\FoodStore.Domain.DataLayer\FoodStore.Domain.DataLayer.csproj" />
-    <ProjectReference Include="..\FoodStore.Domain\FoodStore.Domain.csproj" />
+    <None Include="Resources\Views\Home\Index.resx" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <None Include="Resources\Views\Home\Index.resx" />
+    <ProjectReference Include="..\FoodStore.Core\FoodStore.Core.csproj" />
+    <ProjectReference Include="..\FoodStore.Domain.DataLayer\FoodStore.Domain.DataLayer.csproj" />
+    <ProjectReference Include="..\FoodStore.Domain\FoodStore.Domain.csproj" />
   </ItemGroup>
 
 
