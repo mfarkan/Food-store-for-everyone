@@ -21,7 +21,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:5000"
+      "applicationUrl": "http://localhost:6000"
     },
     "Staging": {
       "commandName": "Project",
@@ -29,7 +29,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Staging"
       },
-      "applicationUrl": "http://localhost:5001"
+      "applicationUrl": "http://localhost:6000"
     },
     "Production": {
       "commandName": "Project",
@@ -37,7 +37,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"
       },
-      "applicationUrl": "http://localhost:5002"
+      "applicationUrl": "http://localhost:6000"
     }
   }
 }

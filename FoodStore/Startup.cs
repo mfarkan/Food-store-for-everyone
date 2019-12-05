@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using AutoMapper;
+using FoodStore.Authorization.CustomAuthorization;
 using FoodStore.Authorization.SuperAdminPolicy;
 using FoodStore.Core.Extensions;
 using FoodStore.Core.MessageOptions;
@@ -75,7 +76,8 @@ namespace FoodStore
             {
                 option.AddPolicy("SuperAdmin", policy => policy.Requirements.Add(new SuperAdminRequirement()));
             });
-            services.AddSingleton<IAuthorizationHandler, SuperAdminHandler>();
+            services.AddScoped<IAuthorizationHandler, SuperAdminHandler>();
+            services.AddScoped<IAuthorizationHandler, CustomAuthPermissionHandler>();
             services.AddNotificationExtensions();
             services.ConfigureApplicationCookie(options =>
             {

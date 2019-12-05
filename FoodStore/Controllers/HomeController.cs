@@ -12,6 +12,8 @@ using FoodStore.Domain.UserManagement;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
+using FoodStore.Authorization.CustomAuthorization;
+using FoodStore.Core.Enumarations;
 
 namespace FoodStore.Controllers
 {
@@ -33,12 +35,13 @@ namespace FoodStore.Controllers
                 );
             return Redirect(returnUrl);
         }
+        [Authorize(Policy = "SuperAdmin")]
         public IActionResult Index()
         {
             return View();
         }
 
-        [Authorize]
+        [CustomAuth(Permissions.UserCreate, Permissions.UserDelete)]
         public IActionResult Privacy()
         {
             return View();

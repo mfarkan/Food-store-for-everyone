@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 namespace WebApplication1.Controllers
 {
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
@@ -27,6 +27,7 @@ namespace WebApplication1.Controllers
             _logger = logger;
         }
         [HttpGet]
+        [Authorize]
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();

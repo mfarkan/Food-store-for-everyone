@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
@@ -13,7 +13,7 @@ RUN dotnet restore "FoodStore/FoodStore.csproj"
 COPY . ./
 RUN dotnet publish -c Release -o out /p:EnvironmentName=Production
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
 WORKDIR /app
 COPY --from=build /app/out ./
 ENTRYPOINT ["dotnet","FoodStore.dll"]
