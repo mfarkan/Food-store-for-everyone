@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\FoodStore.Core\FoodStore.Core.csproj" />
+    <ProjectReference Include="..\..\FoodStore.Domain.DataLayer\FoodStore.Domain.DataLayer.csproj" />
+    <ProjectReference Include="..\..\FoodStore.Domain\FoodStore.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

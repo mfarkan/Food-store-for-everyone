@@ -105,6 +105,7 @@ namespace FoodStore
 
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddAutoMapper(typeof(Startup));
+            services.AddHttpContextAccessor();
 
         }
 
