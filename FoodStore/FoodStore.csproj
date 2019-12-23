@@ -39,6 +39,7 @@
     <ProjectReference Include="..\FoodStore.Core\FoodStore.Core.csproj" />
     <ProjectReference Include="..\FoodStore.Domain.DataLayer\FoodStore.Domain.DataLayer.csproj" />
     <ProjectReference Include="..\FoodStore.Domain\FoodStore.Domain.csproj" />
+    <ProjectReference Include="..\FoodStore.Services\FoodStore.Services.csproj" />
   </ItemGroup>
 
 

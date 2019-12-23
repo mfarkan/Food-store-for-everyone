@@ -6,6 +6,7 @@ EXPOSE 443
 ## COPY *.csproj ./
 COPY ["FoodStore/FoodStore.csproj","FoodStore/"]
 COPY ["FoodStore.Core/FoodStore.Core.csproj", "FoodStore.Core/"]
+COPY ["FoodStore.Services/FoodStore.Services.csproj", "FoodStore.Core/"]
 COPY ["FoodStore.Domain/FoodStore.Domain.csproj", "FoodStore.Domain/"]
 COPY ["FoodStore.Domain.DataLayer/FoodStore.Domain.DataLayer.csproj", "FoodStore.Domain.DataLayer/"]
 RUN dotnet restore "FoodStore/FoodStore.csproj"

@@ -1,5 +1,5 @@
 ﻿using FoodStore.Core.MessageOptions;
-using FoodStore.Core.ServiceInterfaces;
+using FoodStore.Services.ServiceInterfaces;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using MimeKit;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FoodStore.Core.Services
+namespace FoodStore.Services.Services
 {
     public class MessageSender : IMessageSender
     {
