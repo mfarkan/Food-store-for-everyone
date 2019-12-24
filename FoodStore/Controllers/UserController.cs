@@ -108,9 +108,12 @@ namespace FoodStore.Controllers
             }
             return View();
         }
-        public IActionResult Update(string userId)
+        [HttpGet]
+        public async Task<IActionResult> Update(string userId)
         {
-            return View();
+            var user = await _userManager.FindByIdAsync(userId);
+            var viewModel = _mapper.Map<ApplicationUser, ApplicationUserViewModel>(user);
+            return View(viewModel);
         }
         [HttpPut]
         public IActionResult Update()

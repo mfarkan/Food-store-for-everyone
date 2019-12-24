@@ -1,8 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FoodStore.Core.Extensions
 {
@@ -14,7 +10,7 @@ namespace FoodStore.Core.Extensions
         }
         public static string GetCookieName(this IConfiguration config)
         {
-            return config.GetValue<string>("CookieName");
+            return config["CookieName"];
         }
     }
 }

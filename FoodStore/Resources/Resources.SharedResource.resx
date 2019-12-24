@@ -135,6 +135,9 @@
   <data name="ConcurrencyFailure" xml:space="preserve">
     <value>Optimistic concurrency failure, object has been modified.</value>
   </data>
+  <data name="CostManagementSystem" xml:space="preserve">
+    <value>Cost Management</value>
+  </data>
   <data name="CreatedAt" xml:space="preserve">
     <value>Create Date</value>
   </data>
@@ -233,6 +236,9 @@
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="SendingEmailError" xml:space="preserve">
+    <value>Confirmation mail didn't sended.</value>
   </data>
   <data name="StringLengthError" xml:space="preserve">
     <value>The {0} must be between {2} - {1} characters long.</value>

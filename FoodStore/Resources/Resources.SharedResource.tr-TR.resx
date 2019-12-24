@@ -135,6 +135,9 @@
   <data name="ConcurrencyFailure" xml:space="preserve">
     <value>Data eşleşme problemi , nesne değiştirilmiş.</value>
   </data>
+  <data name="CostManagementSystem" xml:space="preserve">
+    <value>Masraf Yönetimi</value>
+  </data>
   <data name="CreatedAt" xml:space="preserve">
     <value>Kayıt Tarihi</value>
   </data>
@@ -233,6 +236,9 @@
   </data>
   <data name="Save" xml:space="preserve">
     <value>Kaydet</value>
+  </data>
+  <data name="SendingEmailError" xml:space="preserve">
+    <value>Doğrulama maili gönderilemedi.</value>
   </data>
   <data name="StringLengthError" xml:space="preserve">
     <value>{0} alanı {2} ila {1} karakter uzunluğunda olmalıdır.</value>

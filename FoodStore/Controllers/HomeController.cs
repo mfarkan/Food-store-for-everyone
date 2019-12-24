@@ -12,7 +12,6 @@ using FoodStore.Domain.UserManagement;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
-using FoodStore.Authorization.CustomAuthorization;
 using FoodStore.Core.Enumarations;
 
 namespace FoodStore.Controllers
@@ -41,7 +40,6 @@ namespace FoodStore.Controllers
             return View();
         }
 
-        [CustomAuth(Permissions.UserCreate, Permissions.UserDelete)]
         public IActionResult Privacy()
         {
             return View();

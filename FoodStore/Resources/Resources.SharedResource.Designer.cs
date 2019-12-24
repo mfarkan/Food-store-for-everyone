@@ -115,6 +115,15 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cost Management.
+        /// </summary>
+        public static string CostManagementSystem {
+            get {
+                return ResourceManager.GetString("CostManagementSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create Date.
         /// </summary>
         public static string CreatedAt {
@@ -408,6 +417,15 @@ namespace FoodStore.Resources {
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirmation mail didn&apos;t sended..
+        /// </summary>
+        public static string SendingEmailError {
+            get {
+                return ResourceManager.GetString("SendingEmailError", resourceCulture);
             }
         }
         

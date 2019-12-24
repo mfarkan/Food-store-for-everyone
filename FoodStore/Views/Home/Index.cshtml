@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "Home Page";
     string culture = Thread.CurrentThread.CurrentUICulture.ToString();
+    Layout="~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="text-center">
@@ -16,13 +17,13 @@
         <input type="hidden" name="returnUrl" value="@(Context.Request.Path)@(Context.Request.QueryString.ToUriComponent())" />
         @if (culture != "tr-TR")
         {
-            <input type="hidden" name="culture" value="tr-TR" />
-            <button type="submit">Türkçe</button>
+        <input type="hidden" name="culture" value="tr-TR" />
+        <button type="submit">Türkçe</button>
         }
         else
         {
-            <input type="hidden" name="culture" value="en-US" />
-            <button type="submit">English</button>
+        <input type="hidden" name="culture" value="en-US" />
+        <button type="submit">English</button>
         }
     </form>
 </div>
