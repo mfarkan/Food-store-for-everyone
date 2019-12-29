@@ -117,13 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CreatePage" xml:space="preserve">
-    <value>Kullanıcı Oluşturma Sayfası</value>
+  <data name="CreatePageTitle" xml:space="preserve">
+    <value>Hesap oluştur!</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Mail Adres</value>
   </data>
   <data name="emailHelp" xml:space="preserve">
     <value>Email bilginizin herhangi bir kişiyle paylaşımı söz konusu değildir.</value>
+  </data>
+  <data name="SignInPage" xml:space="preserve">
+    <value>Hesabınız mı var ? Giriş!</value>
   </data>
 </root>

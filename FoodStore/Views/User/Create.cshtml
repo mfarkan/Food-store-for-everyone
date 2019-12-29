@@ -2,96 +2,153 @@
 @using FoodStore.Core.Enumarations
 @{
     ViewData["Title"] = viewLocalizer["CreatePage"];
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_signInLayout.cshtml";
 
 }
-<h1>Sign Up</h1>
+<div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+<div class="col-lg-7">
+    <div class="p-5">
+        <div class="text-center">
+            <h1 class="h4 text-gray-900 mb-4">@viewLocalizer["CreatePageTitle"]</h1>
+        </div>
+        <form asp-action="Create" asp-controller="User" class="form-group user" autocomplete="off">
+            <div asp-validation-summary="ModelOnly">
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                    <div>
+                        @Html.LabelFor(model => model.UserName)
+                    </div>
+                    <div>
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control form-control-user" } })
+                    </div>
+                    <div>
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div>
+                        @Html.LabelFor(model => model.Sex)
+                    </div>
+                    <div>
+                        @Html.DropDownListFor(q => q.Sex, Html.GetEnumSelectList(typeof(Gender)), sharedLocalizer["OptionLabel"], new { @class = "form-control" })
+                    </div>
+                    <div>
+                        @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    @Html.LabelFor(model => model.Email)
+                </div>
+                <div>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control form-control-user" } })
+                </div>
+                <div>
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+                <small id="emailHelp" class="form-text text-muted">@viewLocalizer["emailHelp"]</small>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                    <div>
+                        @Html.LabelFor(model => model.PassWord)
+                    </div>
+                    <div>
+                        @Html.EditorFor(model => model.PassWord, new { htmlAttributes = new { @class = "form-control form-control-user" } })
+                    </div>
+                    <div>
+                        @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div>
+                        @Html.LabelFor(model => model.ComparePassword)
+                    </div>
+                    <div>
+                        @Html.EditorFor(model => model.ComparePassword, new { htmlAttributes = new { @class = "form-control form-control-user" } })
+                    </div>
+                    <div>
+                        @Html.ValidationMessageFor(model => model.ComparePassword, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                    <div>
+                        @Html.LabelFor(model => model.PhonePrefix)
+                    </div>
+                    <div>
+                        <select asp-for="PhonePrefix" class="form-control">
+                            @foreach (var item in FoodStore.Data.AddressHelper.Countries.OrderBy(q => q.Code))
+                            {
+                                if (item.DialCode == "+90")
+                                {
+                                    <option value="@item.DialCode" selected>@item.Code @item.DialCode</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.DialCode">@item.Code @item.DialCode</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div>
+                        @Html.LabelFor(model => model.PhoneNumber)
+                    </div>
+                    <div>
+                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control form-control-user" } })
+                    </div>
+                    <div>
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">@sharedLocalizer["Save"]</button>
+            </div>
+        </form>
+        <hr>
+        <div class="text-center">
+            <a class="small" href="forgot-password.html">Forgot Password?</a>
+        </div>
+        <div class="text-center">
+            <a class="small" asp-controller="User" asp-action="SignIn">@viewLocalizer["SignInPage"]</a>
+        </div>
+    </div>
+</div>
+@*<form asp-action="Create" asp-controller="User" class="form-group" autocomplete="off">
+        <div asp-validation-summary="ModelOnly">
 
-<form asp-action="Create" asp-controller="User" class="form-group" autocomplete="off">
-    <div asp-validation-summary="ModelOnly">
-
-    </div>
-    <div class="form-group">
-        <div class="col-md-3">
-            @Html.LabelFor(model => model.Email)
         </div>
-        <div class="col-md-3">
-            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="col-md-3">
-            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-        </div>
-        <small id="emailHelp" class="form-text text-muted">@viewLocalizer["emailHelp"]</small>
-    </div>
-    <div class="form-group">
-        <div class="col-md-3">
-            @Html.LabelFor(model => model.UserName)
-        </div>
-        <div class="col-md-3">
-            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="col-md-3">
-            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-3">
-            @Html.LabelFor(model => model.PassWord)
-        </div>
-        <div class="col-md-3">
-            @Html.EditorFor(model => model.PassWord, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="col-md-3">
-            @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-3">
-            @Html.LabelFor(model => model.ComparePassword)
-        </div>
-        <div class="col-md-3">
-            @Html.EditorFor(model => model.ComparePassword, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="col-md-3">
-            @Html.ValidationMessageFor(model => model.ComparePassword, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-3">
-            @Html.LabelFor(model => model.Sex)
-        </div>
-        <div class="col-md-3">
-            @Html.DropDownListFor(q => q.Sex, Html.GetEnumSelectList(typeof(Gender)), sharedLocalizer["OptionLabel"], new { @class = "form-control" })
-        </div>
-        <div class="col-md-3">
-            @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-3">
-            @Html.LabelFor(model => model.PhoneNumber)
-        </div>
-        <div class="col-md-3">
-            <select asp-for="PhonePrefix" class="form-control">
-                @foreach (var item in FoodStore.Data.AddressHelper.Countries.OrderBy(q => q.Code))
-                {
-                    if (item.DialCode == "+90")
+        <div class="form-group">
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.PhoneNumber)
+            </div>
+            <div class="col-md-3">
+                <select asp-for="PhonePrefix" class="form-control">
+                    @foreach (var item in FoodStore.Data.AddressHelper.Countries.OrderBy(q => q.Code))
                     {
-                        <option value="@item.DialCode" selected>@item.Code @item.DialCode</option>
+                        if (item.DialCode == "+90")
+                        {
+                            <option value="@item.DialCode" selected>@item.Code @item.DialCode</option>
+                        }
+                        else
+                        {
+                            <option value="@item.DialCode">@item.Code @item.DialCode</option>
+                        }
                     }
-                    else
-                    {
-                        <option value="@item.DialCode">@item.Code @item.DialCode</option>
-                    }
-                }
-            </select>
-            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </select>
+                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-3">
+                @Html.ValidationMessageFor(model => model.PhonePrefix, "", new { @class = "text-danger" })
+            </div>
         </div>
-        <div class="col-md-3">
-            @Html.ValidationMessageFor(model => model.PhonePrefix, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <button type="submit" class="btn btn-info">@sharedLocalizer["Save"]</button>
-    <button type="reset" class="btn btn-warning">@sharedLocalizer["Clean"]</button>
-</form>
+        <button type="submit" class="btn btn-info">@sharedLocalizer["Save"]</button>
+        <button type="reset" class="btn btn-warning">@sharedLocalizer["Clean"]</button>
+    </form>*@

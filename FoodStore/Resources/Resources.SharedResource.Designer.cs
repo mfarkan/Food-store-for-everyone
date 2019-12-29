@@ -70,6 +70,15 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string CancelButton {
+            get {
+                return ResourceManager.GetString("CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check your credentials..
         /// </summary>
         public static string CheckYourLogin {
@@ -196,6 +205,15 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Logout.
+        /// </summary>
+        public static string ExitButton {
+            get {
+                return ResourceManager.GetString("ExitButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Female.
         /// </summary>
         public static string Female {
@@ -282,6 +300,15 @@ namespace FoodStore.Resources {
         public static string LoginAlreadyAssociated {
             get {
                 return ResourceManager.GetString("LoginAlreadyAssociated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select &quot;Logout&quot; below if you are ready to end your current session..
+        /// </summary>
+        public static string LogOutDescription {
+            get {
+                return ResourceManager.GetString("LogOutDescription", resourceCulture);
             }
         }
         
@@ -390,6 +417,24 @@ namespace FoodStore.Resources {
         public static string PhoneNumberConfirm {
             get {
                 return ResourceManager.GetString("PhoneNumberConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone Prefix.
+        /// </summary>
+        public static string PhonePrefix {
+            get {
+                return ResourceManager.GetString("PhonePrefix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready to leave?.
+        /// </summary>
+        public static string ReadyToLeave {
+            get {
+                return ResourceManager.GetString("ReadyToLeave", resourceCulture);
             }
         }
         

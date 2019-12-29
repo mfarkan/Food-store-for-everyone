@@ -11,6 +11,7 @@ using FoodStore.Domain.UserManagement;
 using FoodStore.Models;
 using FoodStore.Resources;
 using FoodStore.Services.ServiceInterfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -69,6 +70,15 @@ namespace FoodStore.Controllers
             return $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callBackUrl)}'>clicking here</a>.";
         }
         public IActionResult Create()
+        {
+            return View();
+        }
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult ForgotPassword(ForgetPasswordViewModel model)
         {
             return View();
         }
@@ -132,12 +142,13 @@ namespace FoodStore.Controllers
         public async Task<IActionResult> SignOut()
         {
             await _signInManager.SignOutAsync();
-            return Ok();
+            return Redirect("~/");
         }
         public IActionResult AccessDenied()
         {
             return View();
         }
+        [AllowAnonymous]
         public IActionResult SignIn(string ReturnUrl)
         {
             @ViewData["returnUrl"] = ReturnUrl;

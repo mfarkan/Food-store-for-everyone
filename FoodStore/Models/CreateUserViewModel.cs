@@ -39,6 +39,7 @@ namespace FoodStore.Models
         public Gender Sex { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredError")]
+        [Display(Name = "PhonePrefix")]
         public string PhonePrefix { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredError")]

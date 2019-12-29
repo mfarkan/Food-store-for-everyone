@@ -117,16 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CreatePageTitle" xml:space="preserve">
+  <data name="CreateAnAccount" xml:space="preserve">
     <value>Create an account!</value>
   </data>
-  <data name="Email" xml:space="preserve">
-    <value>Email Address</value>
+  <data name="LoginText" xml:space="preserve">
+    <value>Welcome Back!</value>
   </data>
-  <data name="emailHelp" xml:space="preserve">
-    <value>We'll never share your email with anyone else.</value>
-  </data>
-  <data name="SignInPage" xml:space="preserve">
-    <value>Already have an account? Login!</value>
+  <data name="SignInPageTitle" xml:space="preserve">
+    <value>Login!</value>
   </data>
 </root>

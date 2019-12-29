@@ -22,14 +22,14 @@ namespace FoodStore.Resources.Views.User {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Create {
+    public class SignIn {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Create() {
+        internal SignIn() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace FoodStore.Resources.Views.User {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FoodStore.Resources.Views.User.Create", typeof(Create).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FoodStore.Resources.Views.User.SignIn", typeof(SignIn).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,36 +63,27 @@ namespace FoodStore.Resources.Views.User {
         /// <summary>
         ///   Looks up a localized string similar to Create an account!.
         /// </summary>
-        public static string CreatePageTitle {
+        public static string CreateAnAccount {
             get {
-                return ResourceManager.GetString("CreatePageTitle", resourceCulture);
+                return ResourceManager.GetString("CreateAnAccount", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email Address.
+        ///   Looks up a localized string similar to Welcome Back!.
         /// </summary>
-        public static string Email {
+        public static string LoginText {
             get {
-                return ResourceManager.GetString("Email", resourceCulture);
+                return ResourceManager.GetString("LoginText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We&apos;ll never share your email with anyone else..
+        ///   Looks up a localized string similar to Login!.
         /// </summary>
-        public static string emailHelp {
+        public static string SignInPageTitle {
             get {
-                return ResourceManager.GetString("emailHelp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Already have an account? Login!.
-        /// </summary>
-        public static string SignInPage {
-            get {
-                return ResourceManager.GetString("SignInPage", resourceCulture);
+                return ResourceManager.GetString("SignInPageTitle", resourceCulture);
             }
         }
     }

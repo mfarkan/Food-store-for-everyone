@@ -50,5 +50,44 @@ function DeleteDataWithConfirm(swalTitle, deleteMessage, confirmMessage, confirm
                 },
             });
         }
-    })
+    });
+}
+function Logout(swalTitle, confirmMessage, confirmButtonText, cancelButtonText, loadingTitle, loadingMessage, url, returnUrl) {
+    Swal.fire({
+        title: swalTitle,
+        icon: "question",
+        text: confirmMessage,
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: confirmButtonText,
+        cancelButtonText: cancelButtonText
+    }).then((result) => {
+        if (result.value) {
+            swal({
+                title: loadingTitle,
+                text: loadingMessage,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                onOpen: () => {
+                    swal.showLoading()
+                }
+            });
+            $.ajax({
+                type: methodType,
+                url: url,
+                data: data,
+                success: function (result) {
+                    if (result.IsSuccess) {
+                        Swal.fire(
+                            successTitle,
+                            deleteMessage,
+                            "success"
+                        );
+                    }
+                },
+            });
+        }
+    });
 }

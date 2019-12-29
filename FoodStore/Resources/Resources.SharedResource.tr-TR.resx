@@ -120,6 +120,9 @@
   <data name="AccessFailedCount" xml:space="preserve">
     <value>Başarısız Giriş</value>
   </data>
+  <data name="CancelButton" xml:space="preserve">
+    <value>İptal</value>
+  </data>
   <data name="CheckYourLogin" xml:space="preserve">
     <value>Kullanıcı bilgilerinizi kontrol ediniz.</value>
   </data>
@@ -162,6 +165,9 @@
   <data name="Enter" xml:space="preserve">
     <value>Giriş</value>
   </data>
+  <data name="ExitButton" xml:space="preserve">
+    <value>Çıkış</value>
+  </data>
   <data name="Female" xml:space="preserve">
     <value>Kadın</value>
   </data>
@@ -191,6 +197,9 @@
   </data>
   <data name="LoginAlreadyAssociated" xml:space="preserve">
     <value>Bu kullanıcı daha önceden giriş yaptı.</value>
+  </data>
+  <data name="LogOutDescription" xml:space="preserve">
+    <value>Çıkmak istiyorsanız çıkış butonuna basabilirsiniz.</value>
   </data>
   <data name="Male" xml:space="preserve">
     <value>Erkek</value>
@@ -227,6 +236,12 @@
   </data>
   <data name="PhoneNumberConfirm" xml:space="preserve">
     <value>Telefon Doğr.</value>
+  </data>
+  <data name="PhonePrefix" xml:space="preserve">
+    <value>Alan Kodu</value>
+  </data>
+  <data name="ReadyToLeave" xml:space="preserve">
+    <value>Çıkmak istediğinize emin misiniz?</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Beni hatırla</value>

@@ -1,48 +1,59 @@
 ﻿@model LoginUserViewModel
 @{
-    ViewData["Title"] = "SignIn";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = viewLocalizer["SignInPageTitle"];
+    Layout = "~/Views/Shared/_signInLayout.cshtml";
 }
+<div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+<div class="col-lg-6">
+    <div class="p-5">
+        <div class="text-center">
+            <h1 class="h4 text-gray-900 mb-4">@viewLocalizer["LoginText"]</h1>
+        </div>
+        <form asp-action="SignIn" asp-controller="User" asp-route-returnUrl="@ViewData["returnUrl"]" class="user" autocomplete="off">
+            <div asp-validation-summary="All">
+            </div>
+            <div class="form-group">
+                <div>
+                    @Html.LabelFor(model => model.UserName)
+                </div>
+                <div>
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control form-control-user" } })
+                </div>
+                <div>
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    @Html.LabelFor(model => model.PassWord)
+                </div>
+                <div>
+                    @Html.EditorFor(model => model.PassWord, new { htmlAttributes = new { @class = "form-control form-control-user" } })
+                </div>
+                <div>
+                    @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="custom-control custom-checkbox small">
+                    @Html.EditorFor(model => model.Persistent, new { htmlAttributes = new { @class = "custom-control-input" } })
+                    @Html.LabelFor(model => model.Persistent, new { @class = "custom-control-label" })
+                    <div>
+                        @Html.ValidationMessageFor(model => model.Persistent, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">@sharedLocalizer["Enter"]</button>
+            </div>
+        </form>
+        <hr>
+        <div class="text-center">
+            <a class="small" href="forgot-password.html">Forgot Password?</a>
+        </div>
+        <div class="text-center">
+            <a class="small" asp-controller="User" asp-action="Create">@viewLocalizer["CreateAnAccount"]</a>
+        </div>
+    </div>
+</div>
 
-<h1>SignIn</h1>
-
-<form asp-action="SignIn" asp-controller="User" asp-route-returnUrl="@ViewData["returnUrl"]" class="form-group" autocomplete="off">
-    <div asp-validation-summary="All">
-
-    </div>
-    <div class="form-group">
-        <div class="col-md-3">
-            @Html.LabelFor(model => model.UserName)
-        </div>
-        <div class="col-md-3">
-            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="col-md-3">
-            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-3">
-            @Html.LabelFor(model => model.PassWord)
-        </div>
-        <div class="col-md-3">
-            @Html.EditorFor(model => model.PassWord, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="col-md-3">
-            @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div>
-        <div class="col-md-3">
-            @Html.LabelFor(model => model.Persistent)
-        </div>
-        <div class="col-md-3">
-            @Html.EditorFor(model => model.Persistent)
-        </div>
-        <div class="col-md-3">
-            @Html.ValidationMessageFor(model => model.Persistent, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <button type="submit" class="btn btn-info">@sharedLocalizer["Enter"]</button>
-    <button type="reset" class="btn btn-warning">@sharedLocalizer["Clean"]</button>
-</form>

@@ -77,7 +77,6 @@ namespace FoodStore
                 option.AddPolicy("SuperAdmin", policy => policy.Requirements.Add(new SuperAdminRequirement()));
             });
             services.AddScoped<IAuthorizationHandler, SuperAdminHandler>();
-            //services.AddScoped<IAuthorizationHandler, CustomAuthPermissionHandler>();
             services.AddNotificationExtensions();
             services.ConfigureApplicationCookie(options =>
             {
@@ -86,6 +85,7 @@ namespace FoodStore
                 options.AccessDeniedPath = "/User/AccessDenied";
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
                 options.LoginPath = "/User/SignIn";
+                options.LogoutPath = "/User/SignOut";
                 options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
                 options.SlidingExpiration = true;
             });
@@ -132,7 +132,7 @@ namespace FoodStore
             });
             app.UseStaticFiles();
             app.UseRouting();
-
+            
             app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization();

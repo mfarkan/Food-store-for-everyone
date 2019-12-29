@@ -64,6 +64,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Create.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Views\User\SignIn.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SignIn.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 
@@ -95,6 +100,10 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Views\User\Create.tr-TR.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views\User\SignIn.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SignIn.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

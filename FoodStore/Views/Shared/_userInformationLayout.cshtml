@@ -24,3 +24,22 @@
         </a>
     </div>
 </li>
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">@sharedLocalizer["ReadyToLeave"]</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">@sharedLocalizer["LogOutDescription"]</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">@sharedLocalizer["CancelButton"]</button>
+                <form asp-action="SignOut" method="post" asp-controller="User" autocomplete="off">
+                    <button type="submit" class="btn btn-primary">@sharedLocalizer["ExitButton"]</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
