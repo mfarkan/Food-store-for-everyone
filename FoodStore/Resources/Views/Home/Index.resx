@@ -120,4 +120,7 @@
   <data name="AnaSayfa" xml:space="preserve">
     <value>EnglishOne</value>
   </data>
+  <data name="HomePage" xml:space="preserve">
+    <value>Home Page</value>
+  </data>
 </root>

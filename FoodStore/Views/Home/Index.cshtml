@@ -2,28 +2,9 @@
 @using Microsoft.AspNetCore.Localization
 @using Microsoft.AspNetCore.Http.Extensions
 @{
-    ViewData["Title"] = "Home Page";
-    string culture = Thread.CurrentThread.CurrentUICulture.ToString();
+    ViewData["Title"] = viewLocalizer["HomePage"];
     Layout="~/Views/Shared/_Layout.cshtml";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <a href="javascript:;" onclick="DeleteDataWithConfirm()">Tıkla</a>
-    @sharedLocalizer["Deneme"]
-    @viewLocalizer["AnaSayfa"]
-    <form asp-controller="Home" asp-antiforgery="true" asp-action="SetCulture">
-        <input type="hidden" name="returnUrl" value="@(Context.Request.Path)@(Context.Request.QueryString.ToUriComponent())" />
-        @if (culture != "tr-TR")
-        {
-        <input type="hidden" name="culture" value="tr-TR" />
-        <button type="submit">Türkçe</button>
-        }
-        else
-        {
-        <input type="hidden" name="culture" value="en-US" />
-        <button type="submit">English</button>
-        }
-    </form>
-</div>
+<title>
+    @ViewData["Title"]
+</title>

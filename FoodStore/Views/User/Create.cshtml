@@ -1,10 +1,11 @@
 ﻿@model CreateUserViewModel
 @using FoodStore.Core.Enumarations
 @{
-    ViewData["Title"] = viewLocalizer["CreatePage"];
+    ViewData["Title"] = viewLocalizer["CreatePageTitle"];
     Layout = "~/Views/Shared/_signInLayout.cshtml";
 
 }
+<title>@ViewData["Title"]</title>
 <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
 <div class="col-lg-7">
     <div class="p-5">
@@ -12,8 +13,6 @@
             <h1 class="h4 text-gray-900 mb-4">@viewLocalizer["CreatePageTitle"]</h1>
         </div>
         <form asp-action="Create" asp-controller="User" class="form-group user" autocomplete="off">
-            <div asp-validation-summary="ModelOnly">
-            </div>
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
                     <div>
@@ -113,42 +112,10 @@
         </form>
         <hr>
         <div class="text-center">
-            <a class="small" href="forgot-password.html">Forgot Password?</a>
+            <a class="small" asp-action="ForgotPassword" asp-controller="User">@viewLocalizer["ForgotPasswordPage"]</a>
         </div>
         <div class="text-center">
             <a class="small" asp-controller="User" asp-action="SignIn">@viewLocalizer["SignInPage"]</a>
         </div>
     </div>
 </div>
-@*<form asp-action="Create" asp-controller="User" class="form-group" autocomplete="off">
-        <div asp-validation-summary="ModelOnly">
-
-        </div>
-        <div class="form-group">
-            <div class="col-md-3">
-                @Html.LabelFor(model => model.PhoneNumber)
-            </div>
-            <div class="col-md-3">
-                <select asp-for="PhonePrefix" class="form-control">
-                    @foreach (var item in FoodStore.Data.AddressHelper.Countries.OrderBy(q => q.Code))
-                    {
-                        if (item.DialCode == "+90")
-                        {
-                            <option value="@item.DialCode" selected>@item.Code @item.DialCode</option>
-                        }
-                        else
-                        {
-                            <option value="@item.DialCode">@item.Code @item.DialCode</option>
-                        }
-                    }
-                </select>
-                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-            </div>
-            <div class="col-md-3">
-                @Html.ValidationMessageFor(model => model.PhonePrefix, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <button type="submit" class="btn btn-info">@sharedLocalizer["Save"]</button>
-        <button type="reset" class="btn btn-warning">@sharedLocalizer["Clean"]</button>
-    </form>*@

@@ -120,6 +120,9 @@
   <data name="CreateAnAccount" xml:space="preserve">
     <value>Create an account!</value>
   </data>
+  <data name="ForgotPasswordPage" xml:space="preserve">
+    <value>Forgot Password?</value>
+  </data>
   <data name="LoginText" xml:space="preserve">
     <value>Welcome Back!</value>
   </data>

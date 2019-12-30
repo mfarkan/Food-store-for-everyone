@@ -120,6 +120,9 @@
   <data name="CreateAnAccount" xml:space="preserve">
     <value>Yeni hesap aç!</value>
   </data>
+  <data name="ForgotPasswordPage" xml:space="preserve">
+    <value>Şifreni mi unuttun?</value>
+  </data>
   <data name="LoginText" xml:space="preserve">
     <value>Tekrar Hoşgeldiniz!</value>
   </data>

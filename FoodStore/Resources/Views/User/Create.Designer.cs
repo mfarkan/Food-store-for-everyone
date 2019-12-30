@@ -88,6 +88,15 @@ namespace FoodStore.Resources.Views.User {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Forgot Password?.
+        /// </summary>
+        public static string ForgotPasswordPage {
+            get {
+                return ResourceManager.GetString("ForgotPasswordPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Already have an account? Login!.
         /// </summary>
         public static string SignInPage {

@@ -120,4 +120,7 @@
   <data name="AnaSayfa" xml:space="preserve">
     <value>TürkçeOne</value>
   </data>
+  <data name="HomePage" xml:space="preserve">
+    <value>Anasayfa</value>
+  </data>
 </root>

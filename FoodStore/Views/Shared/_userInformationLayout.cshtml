@@ -1,4 +1,25 @@
-﻿<li class="nav-item dropdown no-arrow">
+﻿@using System.Threading;
+@{
+    string culture = Thread.CurrentThread.CurrentUICulture.ToString();
+}
+<li class="nav-item no-arrow mx-1">
+    <a class="nav-link" role="button" aria-haspopup="true" aria-expanded="false">
+        <form asp-controller="Home" asp-antiforgery="true" asp-action="SetCulture">
+            <input type="hidden" name="returnUrl" value="@(Context.Request.Path)@(Context.Request.QueryString.ToUriComponent())" />
+            @if (culture != "tr-TR")
+            {
+                <input type="hidden" name="culture" value="tr-TR" />
+                <button type="submit" class="btn">Türkçe</button>
+            }
+            else
+            {
+                <input type="hidden" name="culture" value="en-US" />
+                <button type="submit" class="btn">English</button>
+            }
+        </form>
+    </a>
+</li>
+<li class="nav-item dropdown no-arrow">
     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
         <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">

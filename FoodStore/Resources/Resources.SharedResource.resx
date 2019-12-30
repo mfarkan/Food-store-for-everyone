@@ -252,6 +252,9 @@
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="Send" xml:space="preserve">
+      <value>Send</value>
+  </data>
   <data name="SendingEmailError" xml:space="preserve">
     <value>Confirmation mail didn't sended.</value>
   </data>

@@ -126,6 +126,9 @@
   <data name="emailHelp" xml:space="preserve">
     <value>Email bilginizin herhangi bir kişiyle paylaşımı söz konusu değildir.</value>
   </data>
+  <data name="ForgotPasswordPage" xml:space="preserve">
+    <value>Şifreni mi unuttun?</value>
+  </data>
   <data name="SignInPage" xml:space="preserve">
     <value>Hesabınız mı var ? Giriş!</value>
   </data>

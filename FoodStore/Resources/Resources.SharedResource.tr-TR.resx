@@ -252,6 +252,9 @@
   <data name="Save" xml:space="preserve">
     <value>Kaydet</value>
   </data>
+  <data name="Send" xml:space="preserve">
+      <value>Gönder</value>
+  </data>
   <data name="SendingEmailError" xml:space="preserve">
     <value>Doğrulama maili gönderilemedi.</value>
   </data>

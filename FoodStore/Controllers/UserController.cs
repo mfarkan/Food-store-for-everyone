@@ -67,7 +67,7 @@ namespace FoodStore.Controllers
         [NonAction]
         private string EmailMessage(string callBackUrl)
         {
-            return $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callBackUrl)}'>clicking here</a>.";
+            return $"Please confirm your account by <a href='{(callBackUrl)}'>clicking here</a>.";
         }
         public IActionResult Create()
         {
@@ -78,9 +78,63 @@ namespace FoodStore.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult ForgotPassword(ForgetPasswordViewModel model)
+        public async Task<IActionResult> ForgotPassword(ForgetPasswordViewModel model)
         {
+            if (ModelState.IsValid)
+            {
+                var appUser = await _userManager.FindByEmailAsync(model.Email);
+                if (appUser == null)
+                {
+                    ModelState.AddModelError("UserNotFound", _localizer["UserNotFound"]);
+                    return View();
+                }
+                var resetToken = await _userManager.GeneratePasswordResetTokenAsync(appUser);
+                var callbackUrl = CallBackUrl("User", "ChangePassword", appUser.Id, HttpUtility.UrlEncode(resetToken), Request.Scheme);
+                await _messageSender.SendEmailAsync(appUser.Email, "Forgot your password?", this.EmailMessage(callbackUrl));
+            }
             return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> ChangePassword(string userId, string token)
+        {
+            ChangePasswordViewModel model = new ChangePasswordViewModel()
+            {
+                resetToken = token,
+                userId = userId
+            };
+            return await Task.Run(() => View(model));
+        }
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var appUser = await _userManager.FindByIdAsync(model.userId);
+                if (appUser == null)
+                {
+                    ModelState.AddModelError("UserNotFound", _localizer["UserNotFound"]);
+                    return View();
+                }
+                var result = await _userManager.ResetPasswordAsync(appUser, HttpUtility.UrlDecode(model.resetToken), model.PassWord);
+                if (result.Errors.Any())
+                {
+                    result.Errors.ToList().ForEach(e => ModelState.AddModelError(e.Code, e.Description));
+                }
+            }
+            return await Task.Run(() => View(model));
+        }
+        [NonAction]
+        private string CallBackUrl(string controller, string action, Guid userId, string token, string scheme)
+        {
+            var callbackUrl = Url.Action(
+                new Microsoft.AspNetCore.Mvc.Routing.UrlActionContext()
+                {
+                    Action = action,
+                    Controller = controller,
+                    Protocol = scheme,
+                    Values = new { userId, token },
+                });
+            return callbackUrl;
         }
         [HttpPost]
         public async Task<IActionResult> Create(CreateUserViewModel user)
@@ -106,12 +160,7 @@ namespace FoodStore.Controllers
                 {
                     var appUser = await _userManager.FindByNameAsync(applicationUser.UserName);
                     var token = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
-
-                    var callbackUrl = Url.Page(
-                        "/User/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { userId = appUser.Id, code = token },
-                        protocol: Request.Scheme);
+                    var callbackUrl = CallBackUrl("User", "ConfirmEmail", appUser.Id, token, Request.Scheme);
                     await _messageSender.SendEmailAsync(appUser.Email, "Confirmation Mail For Your Account", this.EmailMessage(callbackUrl));
                     return Redirect("~/");
                 }

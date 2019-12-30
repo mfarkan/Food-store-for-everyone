@@ -3,6 +3,7 @@
     ViewData["Title"] = viewLocalizer["SignInPageTitle"];
     Layout = "~/Views/Shared/_signInLayout.cshtml";
 }
+<title>@ViewData["Title"]</title>
 <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
 <div class="col-lg-6">
     <div class="p-5">
@@ -10,8 +11,6 @@
             <h1 class="h4 text-gray-900 mb-4">@viewLocalizer["LoginText"]</h1>
         </div>
         <form asp-action="SignIn" asp-controller="User" asp-route-returnUrl="@ViewData["returnUrl"]" class="user" autocomplete="off">
-            <div asp-validation-summary="All">
-            </div>
             <div class="form-group">
                 <div>
                     @Html.LabelFor(model => model.UserName)
@@ -49,7 +48,7 @@
         </form>
         <hr>
         <div class="text-center">
-            <a class="small" href="forgot-password.html">Forgot Password?</a>
+            <a class="small" asp-action="ForgotPassword" asp-controller="User">@viewLocalizer["ForgotPasswordPage"]</a>
         </div>
         <div class="text-center">
             <a class="small" asp-controller="User" asp-action="Create">@viewLocalizer["CreateAnAccount"]</a>

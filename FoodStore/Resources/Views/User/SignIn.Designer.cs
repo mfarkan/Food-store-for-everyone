@@ -70,6 +70,15 @@ namespace FoodStore.Resources.Views.User {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Forgot Password?.
+        /// </summary>
+        public static string ForgotPasswordPage {
+            get {
+                return ResourceManager.GetString("ForgotPasswordPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Welcome Back!.
         /// </summary>
         public static string LoginText {

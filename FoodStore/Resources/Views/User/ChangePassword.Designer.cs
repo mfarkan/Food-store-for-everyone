@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FoodStore.Resources.Views.Home {
+namespace FoodStore.Resources.Views.User {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace FoodStore.Resources.Views.Home {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Index {
+    public class ChangePassword {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Index() {
+        internal ChangePassword() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace FoodStore.Resources.Views.Home {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FoodStore.Resources.Views.Home.Index", typeof(Index).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FoodStore.Resources.Views.User.ChangePassword", typeof(ChangePassword).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,29 @@ namespace FoodStore.Resources.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EnglishOne.
+        ///   Looks up a localized string similar to Change Password.
         /// </summary>
-        public static string AnaSayfa {
+        public static string ChangePasswordPageTitle {
             get {
-                return ResourceManager.GetString("AnaSayfa", resourceCulture);
+                return ResourceManager.GetString("ChangePasswordPageTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Home Page.
+        ///   Looks up a localized string similar to Create an account!.
         /// </summary>
-        public static string HomePage {
+        public static string CreatePage {
             get {
-                return ResourceManager.GetString("HomePage", resourceCulture);
+                return ResourceManager.GetString("CreatePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Already have an account? Login!.
+        /// </summary>
+        public static string SignInPage {
+            get {
+                return ResourceManager.GetString("SignInPage", resourceCulture);
             }
         }
     }
