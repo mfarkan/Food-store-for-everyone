@@ -58,8 +58,11 @@ namespace FoodStore.Controllers
                 return View();
             }
             var result = await _userManager.ConfirmEmailAsync(appUser, HttpUtility.UrlDecode(token));
+            ViewBag.Success = _localizer["UserEmailConfirmed"];
             if (result.Errors.Any())
             {
+                ViewBag.Error = _localizer["UserEmailNotConfirmed"];
+                ViewBag.Success = string.Empty;
                 result.Errors.ToList().ForEach(e => ModelState.AddModelError(e.Code, e.Description));
             }
             return View();
@@ -115,7 +118,8 @@ namespace FoodStore.Controllers
                     ModelState.AddModelError("UserNotFound", _localizer["UserNotFound"]);
                     return View();
                 }
-                var result = await _userManager.ResetPasswordAsync(appUser, HttpUtility.UrlDecode(model.resetToken), model.PassWord);
+                var code = HttpUtility.UrlDecode(model.resetToken).Replace(" ", "+");
+                var result = await _userManager.ResetPasswordAsync(appUser, HttpUtility.UrlDecode(code), model.PassWord);
                 if (result.Errors.Any())
                 {
                     result.Errors.ToList().ForEach(e => ModelState.AddModelError(e.Code, e.Description));
@@ -132,7 +136,7 @@ namespace FoodStore.Controllers
                     Action = action,
                     Controller = controller,
                     Protocol = scheme,
-                    Values = new { userId, token },
+                    Values = new { userId, token = HttpUtility.UrlEncode(token) },
                 });
             return callbackUrl;
         }

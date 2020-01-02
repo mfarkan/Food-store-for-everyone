@@ -253,7 +253,7 @@
     <value>Kaydet</value>
   </data>
   <data name="Send" xml:space="preserve">
-      <value>Gönder</value>
+    <value>Gönder</value>
   </data>
   <data name="SendingEmailError" xml:space="preserve">
     <value>Doğrulama maili gönderilemedi.</value>
@@ -266,6 +266,12 @@
   </data>
   <data name="UserAlreadyInRole" xml:space="preserve">
     <value>Kullanıcı da '{0}' rolü mevcut.</value>
+  </data>
+  <data name="UserEmailConfirmed" xml:space="preserve">
+    <value>Kullanıcıza ait mail adresi doğrulandı.</value>
+  </data>
+  <data name="UserEmailNotConfirmed" xml:space="preserve">
+    <value>Kullanıcı email adresiniz doğrulanamadı.</value>
   </data>
   <data name="UserLocked" xml:space="preserve">
     <value>Kullanıcınız kilitlenmiş gözükmektedir.</value>

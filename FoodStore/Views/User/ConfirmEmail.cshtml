@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = viewLocalizer["ConfirmEmailTitle"];
+    Layout = "~/Views/Shared/_signInLayout.cshtml";
+}
+<title>ViewData["Title"]</title>
+<div class="col-lg-6 d-none d-lg-block bg-register-image"></div>
+<div class="col-lg-6">
+    <div class="p-5">
+        <div class="text-center">
+            <h1 class="h4 text-gray-900 mb-4">@viewLocalizer["ConfirmEmailTitle"]</h1>
+        </div>
+        @if (!string.IsNullOrEmpty(Convert.ToString(ViewBag.Error)))
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.Error
+            </div>
+        }
+        @if (!string.IsNullOrEmpty(Convert.ToString(ViewBag.Success)))
+        {
+            <div class="alert alert-success" role="alert">
+                @ViewBag.Success
+            </div>
+        }
+        <form>
+            <div asp-validation-summary="All">
+            </div>
+        </form>
+        <div class="text-center">
+            <a class="small" asp-controller="User" asp-action="SignIn">@viewLocalizer["SignInPage"]</a>
+        </div>
+    </div>
+</div>
