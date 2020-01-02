@@ -151,6 +151,15 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Operation successfuly completed..
+        /// </summary>
+        public static string DefaultSuccess {
+            get {
+                return ResourceManager.GetString("DefaultSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to English.
         /// </summary>
         public static string Deneme {
@@ -471,15 +480,6 @@ namespace FoodStore.Resources {
         public static string Send {
             get {
                 return ResourceManager.GetString("Send", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Confirmation mail didn&apos;t sended..
-        /// </summary>
-        public static string SendingEmailError {
-            get {
-                return ResourceManager.GetString("SendingEmailError", resourceCulture);
             }
         }
         
