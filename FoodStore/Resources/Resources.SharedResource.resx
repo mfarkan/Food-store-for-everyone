@@ -147,6 +147,9 @@
   <data name="DefaultError" xml:space="preserve">
     <value>An unknown failure has occurred.</value>
   </data>
+  <data name="DefaultSuccess" xml:space="preserve">
+    <value>Operation successfuly completed.</value>
+  </data>
   <data name="Deneme" xml:space="preserve">
     <value>English</value>
   </data>
@@ -254,9 +257,6 @@
   </data>
   <data name="Send" xml:space="preserve">
     <value>Send</value>
-  </data>
-  <data name="SendingEmailError" xml:space="preserve">
-    <value>Confirmation mail didn't sended.</value>
   </data>
   <data name="StringLengthError" xml:space="preserve">
     <value>The {0} must be between {2} - {1} characters long.</value>

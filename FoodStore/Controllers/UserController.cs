@@ -20,6 +20,7 @@ using Microsoft.Extensions.Localization;
 namespace FoodStore.Controllers
 {
     [AutoValidateAntiforgeryToken]
+    [AllowAnonymous]
     public class UserController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -39,12 +40,6 @@ namespace FoodStore.Controllers
             _signInManager = signInManager;
         }
         #region User
-        public IActionResult Index()
-        {
-            var userList = _userManager.Users.ToList();
-            IEnumerable<ApplicationUserViewModel> appUsers = _mapper.Map<List<ApplicationUser>, List<ApplicationUserViewModel>>(userList);
-            return View(appUsers);
-        }
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
             if (userId == null || token == null)
@@ -58,10 +53,10 @@ namespace FoodStore.Controllers
                 return View();
             }
             var result = await _userManager.ConfirmEmailAsync(appUser, HttpUtility.UrlDecode(token));
-            ViewBag.Success = _localizer["UserEmailConfirmed"];
+            ViewBag.Success = _localizer["DefaultSuccess"];
             if (result.Errors.Any())
             {
-                ViewBag.Error = _localizer["UserEmailNotConfirmed"];
+                ViewBag.Error = _localizer["DefaultError"];
                 ViewBag.Success = string.Empty;
                 result.Errors.ToList().ForEach(e => ModelState.AddModelError(e.Code, e.Description));
             }
@@ -93,14 +88,23 @@ namespace FoodStore.Controllers
                 }
                 var resetToken = await _userManager.GeneratePasswordResetTokenAsync(appUser);
                 var callbackUrl = CallBackUrl("User", "ChangePassword", appUser.Id, HttpUtility.UrlEncode(resetToken), Request.Scheme);
-                await _messageSender.SendEmailAsync(appUser.Email, "Forgot your password?", this.EmailMessage(callbackUrl));
+                var isSended = await _messageSender.SendEmailAsync(appUser.Email, "Forgot your password?", this.EmailMessage(callbackUrl));
+                if (isSended)
+                {
+                    ViewBag.Success = _localizer["DefaultSuccess"];
+                }
+                else
+                {
+                    ViewBag.Error = _localizer["DefaultError"];
+                }
             }
+            ModelState.Clear();
             return View();
         }
         [HttpGet]
         public async Task<IActionResult> ChangePassword(string userId, string token)
         {
-            ChangePasswordViewModel model = new ChangePasswordViewModel()
+            ChangePasswordViewModel model = new ChangePasswordViewModel
             {
                 resetToken = token,
                 userId = userId
@@ -120,8 +124,11 @@ namespace FoodStore.Controllers
                 }
                 var code = HttpUtility.UrlDecode(model.resetToken).Replace(" ", "+");
                 var result = await _userManager.ResetPasswordAsync(appUser, HttpUtility.UrlDecode(code), model.PassWord);
+                ViewBag.Success = _localizer["DefaultSuccess"];
                 if (result.Errors.Any())
                 {
+                    ViewBag.Success = string.Empty;
+                    ViewBag.Error = _localizer["DefaultError"];
                     result.Errors.ToList().ForEach(e => ModelState.AddModelError(e.Code, e.Description));
                 }
             }
@@ -131,7 +138,7 @@ namespace FoodStore.Controllers
         private string CallBackUrl(string controller, string action, Guid userId, string token, string scheme)
         {
             var callbackUrl = Url.Action(
-                new Microsoft.AspNetCore.Mvc.Routing.UrlActionContext()
+                new Microsoft.AspNetCore.Mvc.Routing.UrlActionContext
                 {
                     Action = action,
                     Controller = controller,
@@ -158,6 +165,7 @@ namespace FoodStore.Controllers
                 var result = await _userManager.CreateAsync(applicationUser, user.PassWord);
                 if (result.Errors.Any())
                 {
+                    ViewBag.Error = _localizer["DefaultError"];
                     result.Errors.ToList().ForEach(e => ModelState.AddModelError(e.Code, e.Description));
                 }
                 else
@@ -165,13 +173,22 @@ namespace FoodStore.Controllers
                     var appUser = await _userManager.FindByNameAsync(applicationUser.UserName);
                     var token = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
                     var callbackUrl = CallBackUrl("User", "ConfirmEmail", appUser.Id, token, Request.Scheme);
-                    await _messageSender.SendEmailAsync(appUser.Email, "Confirmation Mail For Your Account", this.EmailMessage(callbackUrl));
-                    return Redirect("~/");
+                    var isSended = await _messageSender.SendEmailAsync(appUser.Email, "Confirmation Mail For Your Account", this.EmailMessage(callbackUrl));
+                    if (isSended)
+                    {
+                        ViewBag.Success = _localizer["DefaultSuccess"];
+                    }
+                    else
+                    {
+                        ViewBag.Error = _localizer["DefaultError"];
+                    }
                 }
             }
+            ModelState.Clear();
             return View();
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Update(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -179,11 +196,13 @@ namespace FoodStore.Controllers
             return View(viewModel);
         }
         [HttpPut]
+        [Authorize]
         public IActionResult Update()
         {
             return View();
         }
         [HttpDelete]
+        [Authorize]
         public async Task<IActionResult> Delete(string userId)
         {
             var appUser = await _userManager.FindByIdAsync(userId);
@@ -221,7 +240,9 @@ namespace FoodStore.Controllers
                     {
                         await _userManager.ResetAccessFailedCountAsync(user);
                         if (!string.IsNullOrEmpty(ReturnUrl))
+                        {
                             return Redirect(ReturnUrl);
+                        }
                         return Redirect("~/");
                     }
                     else
@@ -231,17 +252,17 @@ namespace FoodStore.Controllers
                         if (failedCount == Convert.ToInt32(configuration.GetCustomerMaxFailedAccessAttempts()))
                         {
                             await _userManager.SetLockoutEndDateAsync(user, new DateTimeOffset(DateTime.Now.AddMinutes(10)));
-                            ModelState.AddModelError("UserLocked", _localizer["UserLocked"]);
+                            ViewBag.Error = _localizer["UserLocked"];
                         }
                         else
                         {
                             if (result.IsLockedOut)
                             {
-                                ModelState.AddModelError("UserLocked", _localizer["UserLocked"]);
+                                ViewBag.Error = _localizer["UserLocked"];
                             }
                             else
                             {
-                                ModelState.AddModelError("CheckYourLogin", _localizer["CheckYourLogin"]);
+                                ViewBag.Error = _localizer["CheckYourLogin"];
                             }
                         }
                     }

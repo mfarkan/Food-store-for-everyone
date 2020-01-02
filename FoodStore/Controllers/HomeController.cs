@@ -17,6 +17,7 @@ using FoodStore.Core.Enumarations;
 namespace FoodStore.Controllers
 {
     [AutoValidateAntiforgeryToken]
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

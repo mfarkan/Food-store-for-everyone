@@ -147,6 +147,9 @@
   <data name="DefaultError" xml:space="preserve">
     <value>Beklenmeyen bir hata oluştu.</value>
   </data>
+  <data name="DefaultSuccess" xml:space="preserve">
+    <value>İşlem başarıyla gerçekleştirildi.</value>
+  </data>
   <data name="Deneme" xml:space="preserve">
     <value>Türkçe</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="Female" xml:space="preserve">
     <value>Kadın</value>
+  </data>
+  <data name="ForgotPasswordMailSuccess" xml:space="preserve">
+    <value>Şifre sıfırlama maili gönderildi.</value>
   </data>
   <data name="Gender" xml:space="preserve">
     <value>Cinsiyet</value>
@@ -254,9 +260,6 @@
   </data>
   <data name="Send" xml:space="preserve">
     <value>Gönder</value>
-  </data>
-  <data name="SendingEmailError" xml:space="preserve">
-    <value>Doğrulama maili gönderilemedi.</value>
   </data>
   <data name="StringLengthError" xml:space="preserve">
     <value>{0} alanı {2} ila {1} karakter uzunluğunda olmalıdır.</value>
