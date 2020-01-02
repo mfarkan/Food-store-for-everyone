@@ -253,7 +253,7 @@
     <value>Save</value>
   </data>
   <data name="Send" xml:space="preserve">
-      <value>Send</value>
+    <value>Send</value>
   </data>
   <data name="SendingEmailError" xml:space="preserve">
     <value>Confirmation mail didn't sended.</value>
@@ -266,6 +266,12 @@
   </data>
   <data name="UserAlreadyInRole" xml:space="preserve">
     <value>User already in role '{0}'.</value>
+  </data>
+  <data name="UserEmailConfirmed" xml:space="preserve">
+    <value>Your email address confirmed.</value>
+  </data>
+  <data name="UserEmailNotConfirmed" xml:space="preserve">
+    <value>Error occurred while your email been confirming.</value>
   </data>
   <data name="UserLocked" xml:space="preserve">
     <value>Your account has been locked</value>

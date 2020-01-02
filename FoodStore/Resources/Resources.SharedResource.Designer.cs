@@ -466,6 +466,15 @@ namespace FoodStore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send.
+        /// </summary>
+        public static string Send {
+            get {
+                return ResourceManager.GetString("Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirmation mail didn&apos;t sended..
         /// </summary>
         public static string SendingEmailError {
@@ -498,6 +507,24 @@ namespace FoodStore.Resources {
         public static string UserAlreadyInRole {
             get {
                 return ResourceManager.GetString("UserAlreadyInRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your email address confirmed..
+        /// </summary>
+        public static string UserEmailConfirmed {
+            get {
+                return ResourceManager.GetString("UserEmailConfirmed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occurred while your email been confirming..
+        /// </summary>
+        public static string UserEmailNotConfirmed {
+            get {
+                return ResourceManager.GetString("UserEmailNotConfirmed", resourceCulture);
             }
         }
         
