@@ -26,14 +26,14 @@ namespace FoodStore.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IMessageSender _messageSender;
-        private readonly IMapper _mapper;
+        //private readonly IMapper _mapper;
         private readonly IStringLocalizer<SharedResource> _localizer;
         private readonly IConfiguration configuration;
         public UserController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
-            IMessageSender messageSender, IStringLocalizer<SharedResource> localizer, IConfiguration config, IMapper mapper)
+            IMessageSender messageSender, IStringLocalizer<SharedResource> localizer, IConfiguration config)
         {
             configuration = config;
-            _mapper = mapper;
+            //_mapper = mapper;
             _messageSender = messageSender;
             _userManager = userManager;
             _localizer = localizer;
@@ -42,9 +42,9 @@ namespace FoodStore.Controllers
         #region User
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
-            if (userId == null || token == null)
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))
             {
-                return RedirectToPage("/~");
+                return RedirectToPage("~/");
             }
             var appUser = await _userManager.FindByIdAsync(userId);
             if (appUser == null)
@@ -187,14 +187,14 @@ namespace FoodStore.Controllers
             ModelState.Clear();
             return View();
         }
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> Update(string userId)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-            var viewModel = _mapper.Map<ApplicationUser, ApplicationUserViewModel>(user);
-            return View(viewModel);
-        }
+        //[HttpGet]
+        //[Authorize]
+        //public async Task<IActionResult> Update(string userId)
+        //{
+        //    var user = await _userManager.FindByIdAsync(userId);
+        //    var viewModel = _mapper.Map<ApplicationUser, ApplicationUserViewModel>(user);
+        //    return View(viewModel);
+        //}
         [HttpPut]
         [Authorize]
         public IActionResult Update()
