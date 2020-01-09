@@ -70,5 +70,138 @@ namespace FoodStore.Tests
             Assert.AreEqual(controller.ViewData.ModelState["UserNotFound"].ValidationState, ModelValidationState.Invalid);
             Assert.IsTrue(!viewResult.ViewData.ModelState.IsValid);
         }
+        [Test]
+        public async Task Confirm_Email_Return_ModelState_Error_InvalidToken()
+        {
+            var controller = IdentityTests.GetUserController();
+            var result = await controller.ConfirmEmail("FFC42A97-C75D-4F8B-85D7-9044BE829755", "fakeToken");
+
+            Assert.IsAssignableFrom<ViewResult>(result);
+
+            var viewResult = result as ViewResult;
+            Assert.IsTrue(controller.ViewData.ModelState.ErrorCount > 0);
+            Assert.AreEqual(controller.ViewData.ModelState["InvalidToken"].ValidationState, ModelValidationState.Invalid);
+            Assert.IsTrue(!viewResult.ViewData.ModelState.IsValid);
+        }
+        [Test]
+        public async Task Forgot_Password_ModelState_Invalid()
+        {
+            var controller = IdentityTests.GetUserController();
+            controller.ModelState.AddModelError("InvalidToken", "Invalid token.");
+            var result = await controller.ForgotPassword(IdentityTests.GetForgetPasswordViewModel(string.Empty));
+
+            Assert.IsAssignableFrom<ViewResult>(result);
+            var viewResult = result as ViewResult;
+            Assert.IsTrue(controller.ViewData.ModelState.ErrorCount == 0);
+            Assert.IsTrue(viewResult.ViewData.ModelState.IsValid);
+        }
+        [Test]
+        public async Task Forgot_Password_UserNotFound()
+        {
+            var controller = IdentityTests.GetUserController();
+            var result = await controller.ForgotPassword(IdentityTests.GetForgetPasswordViewModel(string.Empty));
+
+            Assert.IsAssignableFrom<ViewResult>(result);
+
+            var viewResult = result as ViewResult;
+            Assert.IsTrue(controller.ViewData.ModelState.ErrorCount > 0);
+            Assert.AreEqual(controller.ViewData.ModelState["UserNotFound"].ValidationState, ModelValidationState.Invalid);
+            Assert.IsFalse(viewResult.ViewData.ModelState.IsValid);
+        }
+        [Test]
+        public async Task Forgot_Password_Email_Sended()
+        {
+            var controller = IdentityTests.GetUserController();
+            var result = await controller.ForgotPassword(IdentityTests.GetForgetPasswordViewModel("foodstore@gmail.com"));
+            Assert.IsAssignableFrom<ViewResult>(result);
+            var successMessage = controller.ViewBag.Success;
+            Assert.IsNotNull(successMessage);
+            Assert.IsAssignableFrom<LocalizedString>(successMessage);
+            var localizedString = successMessage as LocalizedString;
+            Assert.IsFalse(localizedString.ResourceNotFound);
+            Assert.AreEqual(localizedString.Value, "Operation successfuly completed.");
+
+        }
+        [Test]
+        public async Task Change_Password_ModelState_Invalid()
+        {
+            var controller = IdentityTests.GetUserController();
+            controller.ModelState.AddModelError("InvalidToken", "Invalid token.");
+            var result = await controller.ChangePassword(IdentityTests.GetChangePasswordViewModel("FFC42A97-C75D-4F8B-85D7-9044BE829755", "password1", "generatedToken"));
+
+            Assert.IsAssignableFrom<ViewResult>(result);
+            var viewResult = result as ViewResult;
+            Assert.IsTrue(controller.ViewData.ModelState.ErrorCount == 1);
+            Assert.IsFalse(viewResult.ViewData.ModelState.IsValid);
+        }
+        [Test]
+        public async Task Change_Password_User_NotFound()
+        {
+            var controller = IdentityTests.GetUserController();
+            var result = await controller.ChangePassword(IdentityTests.GetChangePasswordViewModel(string.Empty, "password1", "generatedToken"));
+
+            Assert.IsAssignableFrom<ViewResult>(result);
+
+            var viewResult = result as ViewResult;
+            Assert.IsTrue(controller.ViewData.ModelState.ErrorCount > 0);
+            Assert.AreEqual(controller.ViewData.ModelState["UserNotFound"].ValidationState, ModelValidationState.Invalid);
+            Assert.IsFalse(viewResult.ViewData.ModelState.IsValid);
+        }
+        [Test]
+        public async Task Change_Password_Invalid_Token()
+        {
+            var controller = IdentityTests.GetUserController();
+            var result = await controller.ChangePassword(IdentityTests.GetChangePasswordViewModel("FFC42A97-C75D-4F8B-85D7-9044BE829755", "password1", "failToken"));
+
+            Assert.IsAssignableFrom<ViewResult>(result);
+
+            var viewResult = result as ViewResult;
+            Assert.IsTrue(controller.ViewData.ModelState.ErrorCount > 0);
+            Assert.AreEqual(controller.ViewData.ModelState["InvalidToken"].ValidationState, ModelValidationState.Invalid);
+            Assert.IsFalse(viewResult.ViewData.ModelState.IsValid);
+        }
+        [Test]
+        public async Task Change_Password_Identity_Result_Success()
+        {
+            var controller = IdentityTests.GetUserController();
+            var result = await controller.ChangePassword(IdentityTests.GetChangePasswordViewModel("FFC42A97-C75D-4F8B-85D7-9044BE829755", "password1", "generatedToken"));
+
+            Assert.IsAssignableFrom<ViewResult>(result);
+            var viewResult = result as ViewResult;
+            Assert.IsTrue(controller.ViewData.ModelState.ErrorCount == 0);
+            Assert.IsTrue(viewResult.ViewData.ModelState.IsValid);
+        }
+        [Test]
+        public void GetUserTests()
+        {
+            var user = IdentityTests.GetUser();
+            Assert.IsNotNull(user);
+        }
+        [Test]
+        public async Task Sign_In_Model_State_Invalid()
+        {
+            var controller = IdentityTests.GetUserController();
+            controller.ModelState.AddModelError("InvalidToken", "Invalid token.");
+            var result = await controller.SignIn(IdentityTests.GetLoginUserViewModel("mfarkan"), string.Empty);
+            Assert.IsAssignableFrom<ViewResult>(result);
+            var viewResult = result as ViewResult;
+            Assert.IsTrue(controller.ViewData.ModelState.ErrorCount == 1);
+            Assert.IsFalse(viewResult.ViewData.ModelState.IsValid);
+        }
+        [Test]
+        public async Task Sign_In_User_Not_Found()
+        {
+            var controller = IdentityTests.GetUserController();
+            var result = await controller.SignIn(IdentityTests.GetLoginUserViewModel("fakeUser"), string.Empty);
+            Assert.IsAssignableFrom<ViewResult>(result);
+            var viewResult = result as ViewResult;
+            Assert.IsTrue(controller.ViewData.ModelState.ErrorCount > 0);
+            Assert.AreEqual(controller.ViewData.ModelState["CheckYourLogin"].ValidationState, ModelValidationState.Invalid);
+            Assert.IsFalse(viewResult.ViewData.ModelState.IsValid);
+        }
+        public async Task Sign_In_Access_Fail_Count_Return_1()
+        {
+
+        }
     }
 }

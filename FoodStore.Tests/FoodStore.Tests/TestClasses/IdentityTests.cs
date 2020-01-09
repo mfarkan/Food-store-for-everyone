@@ -18,6 +18,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GenFu;
 using FoodStore.Controllers;
+using FoodStore.Core.Extensions;
 
 namespace FoodStore.Tests.TestClasses
 {
@@ -38,6 +39,14 @@ namespace FoodStore.Tests.TestClasses
             controller.ControllerContext.HttpContext.Request.Headers["food-store"] = "123456";
             return controller;
         }
+        public static LoginUserViewModel GetLoginUserViewModel(string userName)
+        {
+            GenFu.GenFu.Configure<LoginUserViewModel>()
+                .Fill(q => q.UserName)
+                .Fill(q => q.PassWord)
+                .Fill(q => q.Persistent);
+            return GenFu.GenFu.New<LoginUserViewModel>();
+        }
         public static CreateUserViewModel GetCreateUserViewModel()
         {
             GenFu.GenFu.Configure<CreateUserViewModel>()
@@ -48,15 +57,31 @@ namespace FoodStore.Tests.TestClasses
                 .Fill(q => q.Sex, Core.Enumarations.Gender.Female);
             return A.New<CreateUserViewModel>();
         }
+        public static ForgetPasswordViewModel GetForgetPasswordViewModel(string email)
+        {
+            GenFu.GenFu.Configure<ForgetPasswordViewModel>()
+                .Fill(q => q.Email, email);
+            return A.New<ForgetPasswordViewModel>();
+        }
+        public static ChangePasswordViewModel GetChangePasswordViewModel(string userId, string passWord, string token)
+        {
+            GenFu.GenFu.Configure<ChangePasswordViewModel>()
+                .Fill(q => q.PassWord, passWord)
+                .Fill(q => q.ComparePassword, q => { return q.PassWord; })
+                .Fill(q => q.resetToken, token)
+                .Fill(q => q.userId, userId);
+            return GenFu.GenFu.New<ChangePasswordViewModel>();
+        }
         public static ApplicationUser GetUser()
         {
             A.Configure<ApplicationUser>()
-                .Fill(q => q.Email, q => { return string.Format("{0}.{1}@gmail.com", q.UserName, q.PhoneNumber); })
+                .Fill(q => q.AccessFailedCount).WithinRange(0, 0)
+                .Fill(q => q.Email, "foodstore@gmail.com")
                 .Fill(q => q.PhoneNumber, "905384811896")
-                .Fill(q => q.AccessFailedCount).WithinRange(0, 3)
                 .Fill(q => q.CreatedAt, DateTime.Now)
                 .Fill(q => q.Gender, Core.Enumarations.Gender.Female)
                 .Fill(q => q.EmailConfirmed, true)
+                .Fill(q => q.UserName, "mfarkan")
                 .Fill(q => q.PhoneNumberConfirmed, true)
                 .Fill(q => q.Id, new Guid("FFC42A97-C75D-4F8B-85D7-9044BE829755"));
             return A.New<ApplicationUser>();
@@ -82,7 +107,8 @@ namespace FoodStore.Tests.TestClasses
             manager.Object.PasswordValidators.Add(new PasswordValidator<ApplicationUser>());
 
             manager.Setup(q => q.CreateAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Success);
-            manager.Setup(q => q.FindByNameAsync(It.IsAny<string>())).ReturnsAsync(GetUser());
+            manager.Setup(q => q.FindByNameAsync("mfarkan")).ReturnsAsync(GetUser());
+            manager.Setup(q => q.FindByNameAsync(It.Is<string>(a => !Equals(a, "mfarkan")))).ReturnsAsync(default(ApplicationUser));
             manager.Setup(q => q.DeleteAsync(It.IsAny<ApplicationUser>())).ReturnsAsync(IdentityResult.Success);
             manager.Setup(q => q.FindByIdAsync(It.Is<string>(a => !Equals(a, "FFC42A97-C75D-4F8B-85D7-9044BE829755")))).ReturnsAsync(default(ApplicationUser));
             manager.Setup(q => q.FindByIdAsync(It.Is<string>(a => Equals(a, "FFC42A97-C75D-4F8B-85D7-9044BE829755")))).ReturnsAsync(GetUser());
@@ -91,8 +117,16 @@ namespace FoodStore.Tests.TestClasses
             manager.Setup(q => q.ConfirmEmailAsync(It.IsAny<ApplicationUser>(), It.Is<string>(s => !Equals(s, "generatedToken"))))
                 .ReturnsAsync(IdentityResult.Failed(new IdentityError { Code = "InvalidToken", Description = "Invalid token." }));
             manager.Setup(q => q.ResetAccessFailedCountAsync(It.IsAny<ApplicationUser>())).ReturnsAsync(IdentityResult.Success);
-            manager.Setup(q => q.GetAccessFailedCountAsync(It.IsAny<ApplicationUser>())).ReturnsAsync(1);
+            manager.Setup(q => q.GetAccessFailedCountAsync(It.Is<ApplicationUser>(a => (a.UserName == "mfarkan")))).ReturnsAsync(1);
+            manager.Setup(q => q.GetAccessFailedCountAsync(It.Is<ApplicationUser>(a => (a.UserName != "mfarkan")))).ReturnsAsync(3);
+            manager.Setup(q => q.AccessFailedAsync(It.IsAny<ApplicationUser>())).ReturnsAsync(IdentityResult.Success);
             manager.Setup(q => q.SetLockoutEndDateAsync(It.IsAny<ApplicationUser>(), It.IsAny<DateTimeOffset>())).ReturnsAsync(IdentityResult.Success);
+            manager.Setup(q => q.FindByEmailAsync(It.Is<string>(a => Equals(a, "foodstore@gmail.com")))).ReturnsAsync(GetUser());
+            manager.Setup(q => q.FindByEmailAsync(It.Is<string>(a => !Equals(a, "foodstore@gmail.com")))).ReturnsAsync(default(ApplicationUser));
+            manager.Setup(q => q.GeneratePasswordResetTokenAsync(It.Is<ApplicationUser>(a => (a.Email == "foodstore@gmail.com")))).ReturnsAsync("generatedToken");
+            manager.Setup(q => q.ResetPasswordAsync(It.Is<ApplicationUser>(a => (a.Id == Guid.Parse("FFC42A97-C75D-4F8B-85D7-9044BE829755"))), It.Is<string>(a => !Equals(a, "generatedToken")), It.IsAny<string>()))
+                .ReturnsAsync(IdentityResult.Failed(new IdentityError { Code = "InvalidToken", Description = "Invalid Token." }));
+            manager.Setup(q => q.ResetPasswordAsync(It.Is<ApplicationUser>(a => (a.Id == Guid.Parse("FFC42A97-C75D-4F8B-85D7-9044BE829755"))), "generatedToken", It.IsAny<string>())).ReturnsAsync(IdentityResult.Success);
             return manager;
         }
         public static Mock<SignInManager<ApplicationUser>> GetMockSignInManager()
@@ -103,7 +137,10 @@ namespace FoodStore.Tests.TestClasses
             Mock<SignInManager<ApplicationUser>> mockApiSignInManager = new Mock<SignInManager<ApplicationUser>>(userManager.Object,
                            _contextAccessor.Object, _userPrincipalFactory.Object, null, null, null, null);
 
-            mockApiSignInManager.Setup(q => q.PasswordSignInAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>())).ReturnsAsync(SignInResult.Success);
+            mockApiSignInManager.Setup(q => q.PasswordSignInAsync(It.Is<ApplicationUser>(a => (a.Id != Guid.Parse("FFC42A97-C75D-4F8B-85D7-9044BE829755")))
+                , It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>())).ReturnsAsync(SignInResult.Failed);
+            mockApiSignInManager.Setup(q => q.PasswordSignInAsync(It.Is<ApplicationUser>(a => (a.Id == Guid.Parse("FFC42A97-C75D-4F8B-85D7-9044BE829755")))
+    , It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>())).ReturnsAsync(SignInResult.Success);
             mockApiSignInManager.Setup(q => q.SignOutAsync()).Returns(Task.CompletedTask);
             mockApiSignInManager.Setup(q => q.IsSignedIn(It.IsAny<ClaimsPrincipal>())).Returns(true);
 
@@ -122,6 +159,7 @@ namespace FoodStore.Tests.TestClasses
             var configManager = new Mock<IConfiguration>();
             configManager.Setup(q => q["DefaultSuccess"]).Returns("Başarıyla Kaydedildi.");
             configManager.Setup(q => q["DefaultError"]).Returns("İşlem başarısız.");
+            configManager.Setup(q => q.GetCustomerMaxFailedAccessAttempts()).Returns("3");
             configManager.Setup(q => q["CookieName"]).Returns("ff483d1ff591898a9942916050d2ca3f");
             return configManager;
         }
