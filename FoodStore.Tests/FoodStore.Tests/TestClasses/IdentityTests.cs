@@ -42,7 +42,7 @@ namespace FoodStore.Tests.TestClasses
         public static LoginUserViewModel GetLoginUserViewModel(string userName)
         {
             GenFu.GenFu.Configure<LoginUserViewModel>()
-                .Fill(q => q.UserName)
+                .Fill(q => q.UserName, userName)
                 .Fill(q => q.PassWord)
                 .Fill(q => q.Persistent);
             return GenFu.GenFu.New<LoginUserViewModel>();
@@ -138,9 +138,9 @@ namespace FoodStore.Tests.TestClasses
                            _contextAccessor.Object, _userPrincipalFactory.Object, null, null, null, null);
 
             mockApiSignInManager.Setup(q => q.PasswordSignInAsync(It.Is<ApplicationUser>(a => (a.Id != Guid.Parse("FFC42A97-C75D-4F8B-85D7-9044BE829755")))
-                , It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>())).ReturnsAsync(SignInResult.Failed);
+                , It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>())).ReturnsAsync(SignInResult.Success);
             mockApiSignInManager.Setup(q => q.PasswordSignInAsync(It.Is<ApplicationUser>(a => (a.Id == Guid.Parse("FFC42A97-C75D-4F8B-85D7-9044BE829755")))
-    , It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>())).ReturnsAsync(SignInResult.Success);
+    , It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>())).ReturnsAsync(SignInResult.Failed);
             mockApiSignInManager.Setup(q => q.SignOutAsync()).Returns(Task.CompletedTask);
             mockApiSignInManager.Setup(q => q.IsSignedIn(It.IsAny<ClaimsPrincipal>())).Returns(true);
 
@@ -159,7 +159,7 @@ namespace FoodStore.Tests.TestClasses
             var configManager = new Mock<IConfiguration>();
             configManager.Setup(q => q["DefaultSuccess"]).Returns("Başarıyla Kaydedildi.");
             configManager.Setup(q => q["DefaultError"]).Returns("İşlem başarısız.");
-            configManager.Setup(q => q.GetCustomerMaxFailedAccessAttempts()).Returns("3");
+            configManager.Setup(q => q.GetSection("UserLockConfig")["MaxAttempts"]).Returns("3");
             configManager.Setup(q => q["CookieName"]).Returns("ff483d1ff591898a9942916050d2ca3f");
             return configManager;
         }

@@ -199,9 +199,26 @@ namespace FoodStore.Tests
             Assert.AreEqual(controller.ViewData.ModelState["CheckYourLogin"].ValidationState, ModelValidationState.Invalid);
             Assert.IsFalse(viewResult.ViewData.ModelState.IsValid);
         }
-        public async Task Sign_In_Access_Fail_Count_Return_1()
+        [Test]
+        public async Task Sign_In_Success()
         {
-
+            var controller = IdentityTests.GetUserController();
+            var result = await controller.SignIn(IdentityTests.GetLoginUserViewModel("mfarkan"), string.Empty);
+            Assert.IsAssignableFrom<RedirectResult>(result);
+            Assert.IsTrue(controller.ViewData.ModelState.ErrorCount == 0);
+        }
+        [Test]
+        public async Task Sign_In_Access_Failed_User_With_PasswordSign()
+        {
+            var controller = IdentityTests.GetUserController();
+            var result = await controller.SignIn(IdentityTests.GetLoginUserViewModel("mfarkan"), string.Empty);
+            Assert.IsAssignableFrom<ViewResult>(result);
+            var successMessage = controller.ViewBag.Error;
+            Assert.IsNotNull(successMessage);
+            Assert.IsAssignableFrom<LocalizedString>(successMessage);
+            var localizedString = successMessage as LocalizedString;
+            Assert.IsFalse(localizedString.ResourceNotFound);
+            Assert.AreEqual(localizedString.Value, "Check your credentials.");
         }
     }
 }
