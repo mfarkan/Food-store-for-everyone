@@ -47,11 +47,11 @@ namespace FoodStore.Tests.TestClasses
                 .Fill(q => q.Persistent);
             return GenFu.GenFu.New<LoginUserViewModel>();
         }
-        public static CreateUserViewModel GetCreateUserViewModel()
+        public static CreateUserViewModel GetCreateUserViewModel(string userName)
         {
             GenFu.GenFu.Configure<CreateUserViewModel>()
                 .Fill(q => q.PhoneNumber)
-                .Fill(q => q.UserName)
+                .Fill(q => q.UserName, userName)
                 .Fill(q => q.Email, q => { return string.Format("{0}.{0}@gmail.com", q.UserName, q.PhoneNumber); })
                 .Fill(q => q.PhonePrefix, "90")
                 .Fill(q => q.Sex, Core.Enumarations.Gender.Female);
@@ -137,7 +137,7 @@ namespace FoodStore.Tests.TestClasses
             Mock<SignInManager<ApplicationUser>> mockApiSignInManager = new Mock<SignInManager<ApplicationUser>>(userManager.Object,
                            _contextAccessor.Object, _userPrincipalFactory.Object, null, null, null, null);
 
-            mockApiSignInManager.Setup(q => q.PasswordSignInAsync(It.Is<ApplicationUser>(a => (a.Id != Guid.Parse("FFC42A97-C75D-4F8B-85D7-9044BE829755")))
+            mockApiSignInManager.Setup(q => q.PasswordSignInAsync(It.IsAny<ApplicationUser>()
                 , It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>())).ReturnsAsync(SignInResult.Success);
             mockApiSignInManager.Setup(q => q.PasswordSignInAsync(It.Is<ApplicationUser>(a => (a.Id == Guid.Parse("FFC42A97-C75D-4F8B-85D7-9044BE829755")))
     , It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>())).ReturnsAsync(SignInResult.Failed);

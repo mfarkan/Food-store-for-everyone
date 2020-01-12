@@ -33,7 +33,7 @@ namespace FoodStore.Tests
         public async Task Create_User_IdentityResult_Success()
         {
             var controller = IdentityTests.GetUserController();
-            var fakeUser = IdentityTests.GetCreateUserViewModel();
+            var fakeUser = IdentityTests.GetCreateUserViewModel("mfarkan");
             var result = await controller.Create(fakeUser);
 
             Assert.IsAssignableFrom<ViewResult>(result);
@@ -201,23 +201,15 @@ namespace FoodStore.Tests
             Assert.IsFalse(viewResult.ViewData.ModelState.IsValid);
         }
         [Test]
-        public async Task Sign_In_Success()
-        {
-            var controller = IdentityTests.GetUserController();
-            var result = await controller.SignIn(IdentityTests.GetLoginUserViewModel("mfarkan"), string.Empty);
-            Assert.IsAssignableFrom<RedirectResult>(result);
-            Assert.IsTrue(controller.ViewData.ModelState.ErrorCount == 0);
-        }
-        [Test]
         public async Task Sign_In_Access_Failed_User_With_PasswordSign()
         {
             var controller = IdentityTests.GetUserController();
             var result = await controller.SignIn(IdentityTests.GetLoginUserViewModel("mfarkan"), string.Empty);
             Assert.IsAssignableFrom<ViewResult>(result);
-            var successMessage = controller.ViewBag.Error;
-            Assert.IsNotNull(successMessage);
-            Assert.IsAssignableFrom<LocalizedString>(successMessage);
-            var localizedString = successMessage as LocalizedString;
+            var errorMessage = controller.ViewBag.Error;
+            Assert.IsNotNull(errorMessage);
+            Assert.IsAssignableFrom<LocalizedString>(errorMessage);
+            var localizedString = errorMessage as LocalizedString;
             Assert.IsFalse(localizedString.ResourceNotFound);
             Assert.AreEqual(localizedString.Value, "Check your credentials.");
         }
