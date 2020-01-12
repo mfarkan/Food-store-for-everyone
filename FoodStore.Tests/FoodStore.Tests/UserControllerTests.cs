@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace FoodStore.Tests
 {
-    [TestFixture]
+    [TestFixture(Author = "Murat Fatih ARKAN", Category = "User Controller", Description = "Kullanıcı işlemleri için oluşturulan testler.")]
     public class UserControllerTests
     {
         public UserControllerTests()
@@ -50,10 +50,11 @@ namespace FoodStore.Tests
             Assert.IsNotNull(result);
         }
         [Test]
-        public async Task Confirm_Email_Return_Main_Page()
+        [TestCase("", "")]
+        public async Task Confirm_Email_Return_Main_Page(string userId, string token)
         {
             var controller = IdentityTests.GetUserController();
-            var result = await controller.ConfirmEmail(string.Empty, string.Empty);
+            var result = await controller.ConfirmEmail(userId, token);
             Assert.IsAssignableFrom<RedirectToPageResult>(result);
             var redirectPageResult = result as RedirectToPageResult;
             Assert.AreEqual("~/", redirectPageResult.PageName);
