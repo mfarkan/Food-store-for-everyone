@@ -21,9 +21,6 @@ namespace FoodStore.Tests
     [TestFixture(Author = "Murat Fatih ARKAN", Category = "User Controller", Description = "Kullanıcı işlemleri için oluşturulan testler.")]
     public class UserControllerTests
     {
-        public UserControllerTests()
-        {
-        }
         [Test]
         public void One_Equal_One_ReturnTrue()
         {

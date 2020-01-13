@@ -148,7 +148,6 @@ namespace FoodStore.Tests.TestClasses
         }
         public static Mock<IMessageSender> GetMessageSender()
         {
-            IOptions<MailSettings> settings = Options.Create(It.IsAny<MailSettings>());
             var messageManager = new Mock<IMessageSender>();
             messageManager.Setup(q => q.SendEmailAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(true);
             messageManager.Setup(q => q.SendSmsAsync()).Returns(Task.CompletedTask);
