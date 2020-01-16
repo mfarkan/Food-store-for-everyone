@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200116081130_migration_first.cs" />
+    <Compile Remove="Migrations\20200116081130_migration_first.Designer.cs" />
+    <Compile Remove="Migrations\20200116081922_migration_first.cs" />
+    <Compile Remove="Migrations\20200116081922_migration_first.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.0">

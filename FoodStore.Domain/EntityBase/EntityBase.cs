@@ -1,4 +1,5 @@
 ﻿using FoodStore.Core.Enumarations;
+using FoodStore.Domain.UserManagement;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -27,8 +28,8 @@ namespace FoodStore.Domain.EntityBase
         public T Id { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
-        public string CreatedBy { get; set; }
-        public string UpdatedBy { get; set; }
+        public ApplicationUser CreatedBy { get; set; }
+        public ApplicationUser UpdatedBy { get; set; }
         public EntityStatusType Status { get; set; }
     }
 }
