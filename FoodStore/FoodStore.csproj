@@ -49,6 +49,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.SharedResource.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Views\Categories\Index.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Index.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Views\Home\Index.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -89,6 +94,10 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Resources.SharedResource.tr-TR.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views\Categories\Index.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Views\Home\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

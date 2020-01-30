@@ -11,6 +11,7 @@ using FoodStore.Domain.UserManagement;
 using FoodStore.Models;
 using FoodStore.Resources;
 using FoodStore.Services.ServiceInterfaces;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -203,6 +204,7 @@ namespace FoodStore.Controllers
         [HttpPost]
         public async Task<IActionResult> SignOut()
         {
+            HttpContext.SignInAsync()
             await _signInManager.SignOutAsync();
             return Redirect("~/");
         }
