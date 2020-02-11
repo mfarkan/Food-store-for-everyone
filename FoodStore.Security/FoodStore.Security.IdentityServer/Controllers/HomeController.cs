@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using FoodStore.Security.IdentityServer.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Authentication;
 
 namespace FoodStore.Security.IdentityServer.Controllers
 {
@@ -22,12 +22,34 @@ namespace FoodStore.Security.IdentityServer.Controllers
         {
             return View();
         }
-
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();
         }
+        public IActionResult Authenticate()
+        {
+            var kubraClaims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.Name,"Kubra"),
+                new Claim(ClaimTypes.Email,"arkankubra@yandex.com.tr"),
+                new Claim("Kubra.Says","My husbanddd")
+            };
 
+            var licenceClaims = new List<Claim>()
+            {
+                new Claim("Driving.License","B"),
+                new Claim(ClaimTypes.Name,"Kubra arkan")
+            };
+            var licenceIdentity = new ClaimsIdentity(licenceClaims, "Goverment");
+            var kubraIdentity = new ClaimsIdentity(kubraClaims, "Kubras Identity");
+
+            var userIdentity = new ClaimsPrincipal(new[] { kubraIdentity, licenceIdentity });
+
+            HttpContext.SignInAsync(userIdentity);
+
+            return RedirectToAction("Index");
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -20,13 +20,16 @@ namespace FoodStore.Security.IdentityServer
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication("CookieAuth").AddCookie("CookieAuth", config =>
+            {
+                config.Cookie.Name = "Kubras.Cookie";
+                config.LoginPath = "/Home/Authenticate";
+            });
             services.AddControllersWithViews();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -36,21 +39,22 @@ namespace FoodStore.Security.IdentityServer
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
             }
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            // first of all find the page and know the which page will execute.
             app.UseRouting();
 
+
+            // Who Are you ?
+            app.UseAuthentication();
+
+            // Are you allowed ?
             app.UseAuthorization();
 
+            // if you're ok reach that point.
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }
