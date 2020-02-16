@@ -1,10 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using FoodStore.Domain.UserManagement;
+using FoodStore.Security.IdentityServer.AuthorizationRequirements;
+using FoodStore.Security.IdentityServer.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,11 +29,37 @@ namespace FoodStore.Security.IdentityServer
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication("CookieAuth").AddCookie("CookieAuth", config =>
+            services.AddDbContext<AppDbContext>(config =>
             {
-                config.Cookie.Name = "Kubras.Cookie";
-                config.LoginPath = "/Home/Authenticate";
+                config.UseInMemoryDatabase("Memory");
             });
+
+            services.AddIdentity<ApplicationUser, ApplicationRole>(config =>
+            {
+                config.Password.RequiredLength = 4;
+                config.Password.RequireDigit = false;
+                config.Password.RequireNonAlphanumeric = false;
+                config.Password.RequireUppercase = false;
+                config.Password.RequireLowercase = false;
+
+            })
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.Cookie.Name = "Identity.Cookie";
+                config.LoginPath = "/Home/Login";
+            });
+
+            services.AddAuthorization(config =>
+            {
+                config.AddPolicy("Claim.DoB", auth =>
+                {
+                    auth.AddRequirements(new CustomRequireClaim(ClaimTypes.DateOfBirth));
+                });
+            });
+            services.AddScoped<IAuthorizationHandler, CustomRequireClaimHandler>();
             services.AddControllersWithViews();
         }
 

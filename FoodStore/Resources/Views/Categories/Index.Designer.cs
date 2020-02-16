@@ -63,9 +63,9 @@ namespace FoodStore.Resources.Views.Categories {
         /// <summary>
         ///   Looks up a localized string similar to Categories.
         /// </summary>
-        public static string Index {
+        public static string Title {
             get {
-                return ResourceManager.GetString("Index", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

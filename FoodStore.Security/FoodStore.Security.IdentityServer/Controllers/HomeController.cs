@@ -6,18 +6,23 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
+using FoodStore.Domain.UserManagement;
+using System.Threading.Tasks;
 
 namespace FoodStore.Security.IdentityServer.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _logger = logger;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
-
         public IActionResult Index()
         {
             return View();
@@ -27,28 +32,54 @@ namespace FoodStore.Security.IdentityServer.Controllers
         {
             return View();
         }
-        public IActionResult Authenticate()
+        [HttpPost]
+        public async Task<IActionResult> Login(string userName, string passWord)
         {
-            var kubraClaims = new List<Claim>()
+            // login functionality.
+            var user = await _userManager.FindByNameAsync(userName);
+            if (user != null)
             {
-                new Claim(ClaimTypes.Name,"Kubra"),
-                new Claim(ClaimTypes.Email,"arkankubra@yandex.com.tr"),
-                new Claim("Kubra.Says","My husbanddd")
-            };
-
-            var licenceClaims = new List<Claim>()
-            {
-                new Claim("Driving.License","B"),
-                new Claim(ClaimTypes.Name,"Kubra arkan")
-            };
-            var licenceIdentity = new ClaimsIdentity(licenceClaims, "Goverment");
-            var kubraIdentity = new ClaimsIdentity(kubraClaims, "Kubras Identity");
-
-            var userIdentity = new ClaimsPrincipal(new[] { kubraIdentity, licenceIdentity });
-
-            HttpContext.SignInAsync(userIdentity);
-
+                var signInResult = await _signInManager.PasswordSignInAsync(user, passWord, false, false);
+                if (signInResult.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public async Task<IActionResult> Register(string userName, string passWord)
+        {
+            // register functionality.
+            ApplicationUser newUser = new ApplicationUser
+            {
+                UserName = userName,
+
+            };
+            var result = await _userManager.CreateAsync(newUser, passWord);
+            if (result.Succeeded)
+            {
+                // sign user here because if successfully registered user in here simply 
+                var signInResult = await _signInManager.PasswordSignInAsync(newUser, passWord, false, false);
+                if (signInResult.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index");
+        }
+        public IActionResult Login()
+        {
+            return View();
+        }
+        public IActionResult Register()
+        {
+            return View();
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -204,7 +204,6 @@ namespace FoodStore.Controllers
         [HttpPost]
         public async Task<IActionResult> SignOut()
         {
-            HttpContext.SignInAsync()
             await _signInManager.SignOutAsync();
             return Redirect("~/");
         }
