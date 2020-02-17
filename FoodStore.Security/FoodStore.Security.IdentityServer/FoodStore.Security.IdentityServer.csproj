@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\FoodStore.Core\FoodStore.Core.csproj" />
+    <ProjectReference Include="..\..\FoodStore.Domain.DataLayer\FoodStore.Domain.DataLayer.csproj" />
     <ProjectReference Include="..\..\FoodStore.Domain\FoodStore.Domain.csproj" />
   </ItemGroup>
 
@@ -34,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\" />
     <Folder Include="Resources\Views\" />
   </ItemGroup>
 

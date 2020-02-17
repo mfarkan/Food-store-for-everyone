@@ -1,18 +1,14 @@
-using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
+using FoodStore.Domain.DataLayer.Infrastructure;
 using FoodStore.Domain.UserManagement;
 using FoodStore.Security.IdentityServer.AuthorizationRequirements;
-using FoodStore.Security.IdentityServer.Data;
 using FoodStore.Security.IdentityServer.Describer;
 using FoodStore.Security.IdentityServer.Resources;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
@@ -34,7 +30,7 @@ namespace FoodStore.Security.IdentityServer
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(config =>
+            services.AddDbContext<UserManagementDbContext>(config =>
             {
                 config.UseInMemoryDatabase("Memory");
             });
@@ -47,14 +43,15 @@ namespace FoodStore.Security.IdentityServer
                 config.Password.RequireUppercase = false;
                 config.Password.RequireLowercase = false;
 
-            }) .AddErrorDescriber<CustomErrorDescriber>()
-                .AddEntityFrameworkStores<AppDbContext>()
+            }).AddErrorDescriber<CustomErrorDescriber>()
+                .AddEntityFrameworkStores<UserManagementDbContext>()
                 .AddDefaultTokenProviders();
 
             services.ConfigureApplicationCookie(config =>
             {
                 config.Cookie.Name = "Identity.Cookie";
                 config.LoginPath = "/Home/Login";
+                config.LogoutPath = "/Home/Logout";
             });
 
             services.AddLocalization(o =>
