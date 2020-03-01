@@ -14,13 +14,19 @@ namespace FoodStore.Security.IdentityServer.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
+        /// <summary>
+        /// it's about the check user allowed to that for some business ? not only check with attribute.
+        /// </summary>
+        //private readonly IAuthorizationService _authorizationService;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public HomeController(
+            UserManager<ApplicationUser>userManager,
+            IAuthorizationService authorizationService,
+            SignInManager<ApplicationUser> signInManager)
         {
-            _logger = logger;
             _userManager = userManager;
+            //_authorizationService = authorizationService;
             _signInManager = signInManager;
         }
         public IActionResult Index()
@@ -76,6 +82,13 @@ namespace FoodStore.Security.IdentityServer.Controllers
         public IActionResult Login()
         {
             return View();
+        }
+        public IActionResult DoSomething([FromServices] IAuthorizationService _authorizationService)
+        {
+            // FromServices is locally get what service you want and just use this inside of this method.
+            // we do some business here but check if you're allowed to pass here.
+            //_authorizationService.AuthorizeAsync(HttpContext.User,)
+            return View("Index");
         }
         public IActionResult Register()
         {

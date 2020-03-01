@@ -78,7 +78,12 @@ namespace FoodStore.Security.IdentityServer
                 });
             });
             services.AddScoped<IAuthorizationHandler, CustomRequireClaimHandler>();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(
+                config =>
+                {
+                    // this place is where you're add your filter or global authroization filter.
+                    //config.Filters
+                });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -106,7 +111,7 @@ namespace FoodStore.Security.IdentityServer
 
             app.UseRequestLocalization(new RequestLocalizationOptions
             {
-                DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("tr-TR"),
+                DefaultRequestCulture = new RequestCulture("tr-TR"),
                 SupportedUICultures = supportedCultures,
                 SupportedCultures = supportedCultures,
                 RequestCultureProviders = new[] { new CookieRequestCultureProvider() },
